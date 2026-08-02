@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import {
   createChartModel,
+  createForecastChartModel,
   fetchEntityHistory,
   historyPoints,
 } from "../src/history";
@@ -71,5 +72,22 @@ describe("createChartModel", () => {
 
   it("returns no model for empty history", () => {
     expect(createChartModel([])).toBeUndefined();
+  });
+});
+
+describe("createForecastChartModel", () => {
+  it("centers now between equal history and forecast intervals", () => {
+    const now = Date.parse("2026-08-02T12:00:00Z");
+    const hour = 60 * 60 * 1000;
+    const model = createForecastChartModel(
+      [{ timestamp: now - 6 * hour, value: 10 }, { timestamp: now, value: 12 }],
+      [{ timestamp: now + 6 * hour, value: 14 }],
+      now,
+      6,
+    );
+    expect(model?.nowX).toBe(400);
+    expect(model?.start).toBe(now - 6 * hour);
+    expect(model?.end).toBe(now + 6 * hour);
+    expect(model?.forecastPoints).toContain("782.0");
   });
 });

@@ -3,10 +3,17 @@
 A landscape-first, responsive Home Assistant weather-station card designed to
 fill a wall-mounted tablet and remain readable from across a room.
 
-Version 0.3 renders live state, follows the active Home Assistant theme,
+Version 0.5 renders live state, follows the active Home Assistant theme,
 supports portrait displays, preserves real zero values, and opens an in-card
 history graph when any value is pressed. It includes a graphical card editor,
-so normal setup does not require writing YAML.
+so normal setup does not require writing YAML. The card and editor automatically
+use Danish when Home Assistant's selected language is Danish, with English as
+the fallback for other languages.
+
+An optional Home Assistant `weather` entity adds forecast data. Outdoor graphs
+place now at the center, with the selected duration of history on the left and
+the same forecast duration on the right. Compact min/max values summarize the
+next 24 hours.
 
 ## Install with HACS
 
@@ -41,10 +48,18 @@ The graphical editor is the recommended setup method:
 2. Search for **Weather Kiosk** and select it.
 3. Choose the indoor and outdoor temperature entities. These two are required.
 4. Add any available humidity, pressure, rain, and wind sensors.
-5. Select **Save**.
+5. Select a weather entity and hourly or daily forecast resolution.
+6. Select **Save**.
 
 The editor also provides the title, layout, and pressure-trend threshold. YAML
 mode remains available for copying configurations or advanced troubleshooting.
+
+## Language
+
+The card follows the language selected for the current Home Assistant user.
+Danish (`da` and `da-DK`) localizes card labels, history dialogs, accessibility
+text, visual-editor fields, pressure trends, and compass abbreviations. No card
+configuration is needed. English is used for unsupported languages.
 
 ### Manual YAML configuration
 
@@ -78,6 +93,8 @@ entities:
   rain_24h: sensor.ecowitt_rain_24_hours
   wind_speed: sensor.ecowitt_wind_speed
   wind_direction: sensor.ecowitt_wind_direction
+forecast_entity: weather.forecast_home
+forecast_type: hourly
 ```
 
 Only `outdoor_temperature` and `indoor_temperature` are required. All entity
@@ -102,6 +119,20 @@ pressure_trend_threshold: 0.5
 
 The threshold uses the same unit as the configured pressure entity.
 
+## Forecast behavior
+
+Forecasts are retrieved with Home Assistant's `weather.get_forecasts` action.
+Choose `hourly` for smooth short-range graphs or `daily` when the provider only
+supports daily forecasts. The forecast source is optional.
+
+Outdoor temperature, humidity, pressure, and wind speed receive forecast graph
+segments and next-24-hour min/max labels when the provider supplies those
+fields. Wind direction receives a forecast graph segment but no min/max because
+angles wrap at north. Rain remains historical: forecast precipitation is an
+amount per forecast period and is not safely interchangeable with a rain-rate
+sensor or a rolling 24-hour total. Common temperature, pressure, and wind-speed
+units are converted to the configured sensor's unit before charting.
+
 ## Development
 
 ```bash
@@ -118,5 +149,4 @@ full-screen kiosk presentation.
 
 ## Planned next slices
 
-- Forecast panel
 - Browser-level visual and interaction tests

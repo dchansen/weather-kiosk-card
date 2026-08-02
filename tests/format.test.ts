@@ -35,4 +35,13 @@ describe("directionLabel", () => {
   ])("maps %s degrees to %s", (degrees, label) => {
     expect(directionLabel(degrees)).toBe(label);
   });
+
+  it.each([
+    [45, "NØ"],
+    [90, "Ø"],
+    [225, "SV"],
+    [270, "V"],
+  ])("maps %s degrees to Danish %s", (degrees, label) => {
+    expect(directionLabel(degrees, "da-DK")).toBe(label);
+  });
 });

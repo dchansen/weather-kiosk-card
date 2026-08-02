@@ -32,9 +32,14 @@ export function formatState(
   };
 }
 
-export function directionLabel(degrees: number | undefined): string {
+export function directionLabel(
+  degrees: number | undefined,
+  language = "en",
+): string {
   if (degrees === undefined) return "—";
-  const labels = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
+  const labels = language.toLowerCase().startsWith("da")
+    ? ["N", "NØ", "Ø", "SØ", "S", "SV", "V", "NV"]
+    : ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
   const normalized = ((degrees % 360) + 360) % 360;
   return labels[Math.round(normalized / 45) % 8] ?? "—";
 }

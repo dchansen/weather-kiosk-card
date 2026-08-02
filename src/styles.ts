@@ -151,6 +151,24 @@ export const weatherKioskStyles = css`
     font-weight: 500;
   }
 
+  .forecast-range {
+    display: block;
+    margin-top: 0.45em;
+    color: var(--secondary-text-color);
+    font-size: clamp(10px, 1.2vmin, 15px);
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.25;
+    text-transform: none;
+  }
+
+  .secondary-value .forecast-range {
+    display: inline;
+    margin: 0 0 0 0.4em;
+    font-size: 0.62em;
+  }
+
   .metrics {
     display: grid;
     gap: clamp(8px, 1.4vmin, 16px);
@@ -360,6 +378,23 @@ export const weatherKioskStyles = css`
     vector-effect: non-scaling-stroke;
   }
 
+  .forecast-line {
+    fill: none;
+    stroke: var(--accent-color, var(--primary-color));
+    stroke-dasharray: 9 7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 4;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .now-line {
+    stroke: var(--secondary-text-color);
+    stroke-dasharray: 3 5;
+    stroke-width: 1.5;
+    vector-effect: non-scaling-stroke;
+  }
+
   .latest-point {
     fill: var(--primary-color);
     stroke: var(--ha-card-background, var(--card-background-color));
@@ -392,6 +427,21 @@ export const weatherKioskStyles = css`
     justify-content: space-between;
     color: var(--secondary-text-color);
     font-size: 12px;
+  }
+
+  .chart-legend {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 7px;
+    margin-top: 5px;
+    color: var(--secondary-text-color);
+    font-size: 11px;
+  }
+
+  .chart-legend span {
+    width: 24px;
+    border-top: 3px dashed var(--accent-color, var(--primary-color));
   }
 
   .chart-message {

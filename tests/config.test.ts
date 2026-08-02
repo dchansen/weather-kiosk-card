@@ -11,7 +11,7 @@ describe("normalizeConfig", () => {
           indoor_temperature: "sensor.indoor_temperature",
         },
       }),
-    ).toMatchObject({ title: "Weather", layout: "auto" });
+    ).toMatchObject({ title: "", layout: "auto", forecast_type: "hourly" });
   });
 
   it("requires both primary temperature entities", () => {
@@ -63,5 +63,30 @@ describe("normalizeConfig", () => {
         },
       }),
     ).toThrow("pressure_trend_threshold");
+  });
+
+  it("accepts a weather forecast source and daily resolution", () => {
+    const config = normalizeConfig({
+      type: "custom:weather-kiosk-card",
+      forecast_entity: "weather.home",
+      forecast_type: "daily",
+      entities: {
+        outdoor_temperature: "sensor.outdoor_temperature",
+        indoor_temperature: "sensor.indoor_temperature",
+      },
+    });
+    expect(config.forecast_entity).toBe("weather.home");
+    expect(config.forecast_type).toBe("daily");
+  });
+
+  it("rejects an invalid forecast source", () => {
+    expect(() => normalizeConfig({
+      type: "custom:weather-kiosk-card",
+      forecast_entity: "not an entity",
+      entities: {
+        outdoor_temperature: "sensor.outdoor_temperature",
+        indoor_temperature: "sensor.indoor_temperature",
+      },
+    })).toThrow("forecast_entity");
   });
 });

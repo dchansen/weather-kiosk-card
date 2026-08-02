@@ -29,11 +29,11 @@ var e = globalThis, t = e.ShadowRoot && (e.ShadyCSS === void 0 || e.ShadyCSS.nat
 	let t = "";
 	for (let n of e.cssRules) t += n.cssText;
 	return a(t);
-})(e) : e, { is: l, defineProperty: u, getOwnPropertyDescriptor: d, getOwnPropertyNames: f, getOwnPropertySymbols: p, getPrototypeOf: ee } = Object, m = globalThis, h = m.trustedTypes, te = h ? h.emptyScript : "", g = m.reactiveElementPolyfillSupport, _ = (e, t) => e, v = {
+})(e) : e, { is: l, defineProperty: u, getOwnPropertyDescriptor: d, getOwnPropertyNames: f, getOwnPropertySymbols: p, getPrototypeOf: m } = Object, h = globalThis, g = h.trustedTypes, _ = g ? g.emptyScript : "", v = h.reactiveElementPolyfillSupport, y = (e, t) => e, b = {
 	toAttribute(e, t) {
 		switch (t) {
 			case Boolean:
-				e = e ? te : null;
+				e = e ? _ : null;
 				break;
 			case Object:
 			case Array: e = e == null ? e : JSON.stringify(e);
@@ -58,23 +58,23 @@ var e = globalThis, t = e.ShadowRoot && (e.ShadyCSS === void 0 || e.ShadyCSS.nat
 		}
 		return n;
 	}
-}, y = (e, t) => !l(e, t), ne = {
+}, x = (e, t) => !l(e, t), S = {
 	attribute: !0,
 	type: String,
-	converter: v,
+	converter: b,
 	reflect: !1,
 	useDefault: !1,
-	hasChanged: y
+	hasChanged: x
 };
-Symbol.metadata ??= Symbol("metadata"), m.litPropertyMetadata ??= /* @__PURE__ */ new WeakMap();
-var b = class extends HTMLElement {
+Symbol.metadata ??= Symbol("metadata"), h.litPropertyMetadata ??= /* @__PURE__ */ new WeakMap();
+var C = class extends HTMLElement {
 	static addInitializer(e) {
 		this._$Ei(), (this.l ??= []).push(e);
 	}
 	static get observedAttributes() {
 		return this.finalize(), this._$Eh && [...this._$Eh.keys()];
 	}
-	static createProperty(e, t = ne) {
+	static createProperty(e, t = S) {
 		if (t.state && (t.attribute = !1), this._$Ei(), this.prototype.hasOwnProperty(e) && ((t = Object.create(t)).wrapped = !0), this.elementProperties.set(e, t), !t.noAccessor) {
 			let n = Symbol(), r = this.getPropertyDescriptor(e, n, t);
 			r !== void 0 && u(this.prototype, e, r);
@@ -100,16 +100,16 @@ var b = class extends HTMLElement {
 		};
 	}
 	static getPropertyOptions(e) {
-		return this.elementProperties.get(e) ?? ne;
+		return this.elementProperties.get(e) ?? S;
 	}
 	static _$Ei() {
-		if (this.hasOwnProperty(_("elementProperties"))) return;
-		let e = ee(this);
+		if (this.hasOwnProperty(y("elementProperties"))) return;
+		let e = m(this);
 		e.finalize(), e.l !== void 0 && (this.l = [...e.l]), this.elementProperties = new Map(e.elementProperties);
 	}
 	static finalize() {
-		if (this.hasOwnProperty(_("finalized"))) return;
-		if (this.finalized = !0, this._$Ei(), this.hasOwnProperty(_("properties"))) {
+		if (this.hasOwnProperty(y("finalized"))) return;
+		if (this.finalized = !0, this._$Ei(), this.hasOwnProperty(y("properties"))) {
 			let e = this.properties, t = [...f(e), ...p(e)];
 			for (let n of t) this.createProperty(n, e[n]);
 		}
@@ -171,14 +171,14 @@ var b = class extends HTMLElement {
 	_$ET(e, t) {
 		let n = this.constructor.elementProperties.get(e), r = this.constructor._$Eu(e, n);
 		if (r !== void 0 && !0 === n.reflect) {
-			let i = (n.converter?.toAttribute === void 0 ? v : n.converter).toAttribute(t, n.type);
+			let i = (n.converter?.toAttribute === void 0 ? b : n.converter).toAttribute(t, n.type);
 			this._$Em = e, i == null ? this.removeAttribute(r) : this.setAttribute(r, i), this._$Em = null;
 		}
 	}
 	_$AK(e, t) {
 		let n = this.constructor, r = n._$Eh.get(e);
 		if (r !== void 0 && this._$Em !== r) {
-			let e = n.getPropertyOptions(r), i = typeof e.converter == "function" ? { fromAttribute: e.converter } : e.converter?.fromAttribute === void 0 ? v : e.converter;
+			let e = n.getPropertyOptions(r), i = typeof e.converter == "function" ? { fromAttribute: e.converter } : e.converter?.fromAttribute === void 0 ? b : e.converter;
 			this._$Em = r;
 			let a = i.fromAttribute(t, e.type);
 			this[r] = a ?? this._$Ej?.get(r) ?? a, this._$Em = null;
@@ -187,7 +187,7 @@ var b = class extends HTMLElement {
 	requestUpdate(e, t, n, r = !1, i) {
 		if (e !== void 0) {
 			let a = this.constructor;
-			if (!1 === r && (i = this[e]), n ??= a.getPropertyOptions(e), !((n.hasChanged ?? y)(i, t) || n.useDefault && n.reflect && i === this._$Ej?.get(e) && !this.hasAttribute(a._$Eu(e, n)))) return;
+			if (!1 === r && (i = this[e]), n ??= a.getPropertyOptions(e), !((n.hasChanged ?? x)(i, t) || n.useDefault && n.reflect && i === this._$Ej?.get(e) && !this.hasAttribute(a._$Eu(e, n)))) return;
 			this.C(e, t, n);
 		}
 		!1 === this.isUpdatePending && (this._$ES = this._$EP());
@@ -251,87 +251,87 @@ var b = class extends HTMLElement {
 	updated(e) {}
 	firstUpdated(e) {}
 };
-b.elementStyles = [], b.shadowRootOptions = { mode: "open" }, b[_("elementProperties")] = /* @__PURE__ */ new Map(), b[_("finalized")] = /* @__PURE__ */ new Map(), g?.({ ReactiveElement: b }), (m.reactiveElementVersions ??= []).push("2.1.2");
+C.elementStyles = [], C.shadowRootOptions = { mode: "open" }, C[y("elementProperties")] = /* @__PURE__ */ new Map(), C[y("finalized")] = /* @__PURE__ */ new Map(), v?.({ ReactiveElement: C }), (h.reactiveElementVersions ??= []).push("2.1.2");
 //#endregion
 //#region node_modules/lit-html/lit-html.js
-var x = globalThis, re = (e) => e, S = x.trustedTypes, C = S ? S.createPolicy("lit-html", { createHTML: (e) => e }) : void 0, w = "$lit$", T = `lit$${Math.random().toFixed(9).slice(2)}$`, ie = "?" + T, ae = `<${ie}>`, E = document, D = () => E.createComment(""), O = (e) => e === null || typeof e != "object" && typeof e != "function", k = Array.isArray, oe = (e) => k(e) || typeof e?.[Symbol.iterator] == "function", A = "[ 	\n\f\r]", j = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, M = /-->/g, se = />/g, N = RegExp(`>|${A}(?:([^\\s"'>=/]+)(${A}*=${A}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`, "g"), ce = /'/g, le = /"/g, P = /^(?:script|style|textarea|title)$/i, F = ((e) => (t, ...n) => ({
+var w = globalThis, T = (e) => e, E = w.trustedTypes, D = E ? E.createPolicy("lit-html", { createHTML: (e) => e }) : void 0, ee = "$lit$", O = `lit$${Math.random().toFixed(9).slice(2)}$`, te = "?" + O, ne = `<${te}>`, k = document, A = () => k.createComment(""), j = (e) => e === null || typeof e != "object" && typeof e != "function", re = Array.isArray, ie = (e) => re(e) || typeof e?.[Symbol.iterator] == "function", ae = "[ 	\n\f\r]", M = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, oe = /-->/g, se = />/g, N = RegExp(`>|${ae}(?:([^\\s"'>=/]+)(${ae}*=${ae}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`, "g"), ce = /'/g, le = /"/g, ue = /^(?:script|style|textarea|title)$/i, P = ((e) => (t, ...n) => ({
 	_$litType$: e,
 	strings: t,
 	values: n
-}))(1), I = Symbol.for("lit-noChange"), L = Symbol.for("lit-nothing"), ue = /* @__PURE__ */ new WeakMap(), R = E.createTreeWalker(E, 129);
-function z(e, t) {
-	if (!k(e) || !e.hasOwnProperty("raw")) throw Error("invalid template strings array");
-	return C === void 0 ? t : C.createHTML(t);
+}))(1), F = Symbol.for("lit-noChange"), I = Symbol.for("lit-nothing"), de = /* @__PURE__ */ new WeakMap(), L = k.createTreeWalker(k, 129);
+function fe(e, t) {
+	if (!re(e) || !e.hasOwnProperty("raw")) throw Error("invalid template strings array");
+	return D === void 0 ? t : D.createHTML(t);
 }
-var de = (e, t) => {
-	let n = e.length - 1, r = [], i, a = t === 2 ? "<svg>" : t === 3 ? "<math>" : "", o = j;
+var pe = (e, t) => {
+	let n = e.length - 1, r = [], i, a = t === 2 ? "<svg>" : t === 3 ? "<math>" : "", o = M;
 	for (let t = 0; t < n; t++) {
 		let n = e[t], s, c, l = -1, u = 0;
-		for (; u < n.length && (o.lastIndex = u, c = o.exec(n), c !== null);) u = o.lastIndex, o === j ? c[1] === "!--" ? o = M : c[1] === void 0 ? c[2] === void 0 ? c[3] !== void 0 && (o = N) : (P.test(c[2]) && (i = RegExp("</" + c[2], "g")), o = N) : o = se : o === N ? c[0] === ">" ? (o = i ?? j, l = -1) : c[1] === void 0 ? l = -2 : (l = o.lastIndex - c[2].length, s = c[1], o = c[3] === void 0 ? N : c[3] === "\"" ? le : ce) : o === le || o === ce ? o = N : o === M || o === se ? o = j : (o = N, i = void 0);
+		for (; u < n.length && (o.lastIndex = u, c = o.exec(n), c !== null);) u = o.lastIndex, o === M ? c[1] === "!--" ? o = oe : c[1] === void 0 ? c[2] === void 0 ? c[3] !== void 0 && (o = N) : (ue.test(c[2]) && (i = RegExp("</" + c[2], "g")), o = N) : o = se : o === N ? c[0] === ">" ? (o = i ?? M, l = -1) : c[1] === void 0 ? l = -2 : (l = o.lastIndex - c[2].length, s = c[1], o = c[3] === void 0 ? N : c[3] === "\"" ? le : ce) : o === le || o === ce ? o = N : o === oe || o === se ? o = M : (o = N, i = void 0);
 		let d = o === N && e[t + 1].startsWith("/>") ? " " : "";
-		a += o === j ? n + ae : l >= 0 ? (r.push(s), n.slice(0, l) + w + n.slice(l) + T + d) : n + T + (l === -2 ? t : d);
+		a += o === M ? n + ne : l >= 0 ? (r.push(s), n.slice(0, l) + ee + n.slice(l) + O + d) : n + O + (l === -2 ? t : d);
 	}
-	return [z(e, a + (e[n] || "<?>") + (t === 2 ? "</svg>" : t === 3 ? "</math>" : "")), r];
-}, B = class e {
+	return [fe(e, a + (e[n] || "<?>") + (t === 2 ? "</svg>" : t === 3 ? "</math>" : "")), r];
+}, R = class e {
 	constructor({ strings: t, _$litType$: n }, r) {
 		let i;
 		this.parts = [];
-		let a = 0, o = 0, s = t.length - 1, c = this.parts, [l, u] = de(t, n);
-		if (this.el = e.createElement(l, r), R.currentNode = this.el.content, n === 2 || n === 3) {
+		let a = 0, o = 0, s = t.length - 1, c = this.parts, [l, u] = pe(t, n);
+		if (this.el = e.createElement(l, r), L.currentNode = this.el.content, n === 2 || n === 3) {
 			let e = this.el.content.firstChild;
 			e.replaceWith(...e.childNodes);
 		}
-		for (; (i = R.nextNode()) !== null && c.length < s;) {
+		for (; (i = L.nextNode()) !== null && c.length < s;) {
 			if (i.nodeType === 1) {
-				if (i.hasAttributes()) for (let e of i.getAttributeNames()) if (e.endsWith(w)) {
-					let t = u[o++], n = i.getAttribute(e).split(T), r = /([.?@])?(.*)/.exec(t);
+				if (i.hasAttributes()) for (let e of i.getAttributeNames()) if (e.endsWith(ee)) {
+					let t = u[o++], n = i.getAttribute(e).split(O), r = /([.?@])?(.*)/.exec(t);
 					c.push({
 						type: 1,
 						index: a,
 						name: r[2],
 						strings: n,
-						ctor: r[1] === "." ? pe : r[1] === "?" ? me : r[1] === "@" ? he : U
+						ctor: r[1] === "." ? he : r[1] === "?" ? ge : r[1] === "@" ? _e : V
 					}), i.removeAttribute(e);
-				} else e.startsWith(T) && (c.push({
+				} else e.startsWith(O) && (c.push({
 					type: 6,
 					index: a
 				}), i.removeAttribute(e));
-				if (P.test(i.tagName)) {
-					let e = i.textContent.split(T), t = e.length - 1;
+				if (ue.test(i.tagName)) {
+					let e = i.textContent.split(O), t = e.length - 1;
 					if (t > 0) {
-						i.textContent = S ? S.emptyScript : "";
-						for (let n = 0; n < t; n++) i.append(e[n], D()), R.nextNode(), c.push({
+						i.textContent = E ? E.emptyScript : "";
+						for (let n = 0; n < t; n++) i.append(e[n], A()), L.nextNode(), c.push({
 							type: 2,
 							index: ++a
 						});
-						i.append(e[t], D());
+						i.append(e[t], A());
 					}
 				}
-			} else if (i.nodeType === 8) if (i.data === ie) c.push({
+			} else if (i.nodeType === 8) if (i.data === te) c.push({
 				type: 2,
 				index: a
 			});
 			else {
 				let e = -1;
-				for (; (e = i.data.indexOf(T, e + 1)) !== -1;) c.push({
+				for (; (e = i.data.indexOf(O, e + 1)) !== -1;) c.push({
 					type: 7,
 					index: a
-				}), e += T.length - 1;
+				}), e += O.length - 1;
 			}
 			a++;
 		}
 	}
 	static createElement(e, t) {
-		let n = E.createElement("template");
+		let n = k.createElement("template");
 		return n.innerHTML = e, n;
 	}
 };
-function V(e, t, n = e, r) {
-	if (t === I) return t;
-	let i = r === void 0 ? n._$Cl : n._$Co?.[r], a = O(t) ? void 0 : t._$litDirective$;
-	return i?.constructor !== a && (i?._$AO?.(!1), a === void 0 ? i = void 0 : (i = new a(e), i._$AT(e, n, r)), r === void 0 ? n._$Cl = i : (n._$Co ??= [])[r] = i), i !== void 0 && (t = V(e, i._$AS(e, t.values), i, r)), t;
+function z(e, t, n = e, r) {
+	if (t === F) return t;
+	let i = r === void 0 ? n._$Cl : n._$Co?.[r], a = j(t) ? void 0 : t._$litDirective$;
+	return i?.constructor !== a && (i?._$AO?.(!1), a === void 0 ? i = void 0 : (i = new a(e), i._$AT(e, n, r)), r === void 0 ? n._$Cl = i : (n._$Co ??= [])[r] = i), i !== void 0 && (t = z(e, i._$AS(e, t.values), i, r)), t;
 }
-var fe = class {
+var me = class {
 	constructor(e, t) {
 		this._$AV = [], this._$AN = void 0, this._$AD = e, this._$AM = t;
 	}
@@ -342,28 +342,28 @@ var fe = class {
 		return this._$AM._$AU;
 	}
 	u(e) {
-		let { el: { content: t }, parts: n } = this._$AD, r = (e?.creationScope ?? E).importNode(t, !0);
-		R.currentNode = r;
-		let i = R.nextNode(), a = 0, o = 0, s = n[0];
+		let { el: { content: t }, parts: n } = this._$AD, r = (e?.creationScope ?? k).importNode(t, !0);
+		L.currentNode = r;
+		let i = L.nextNode(), a = 0, o = 0, s = n[0];
 		for (; s !== void 0;) {
 			if (a === s.index) {
 				let t;
-				s.type === 2 ? t = new H(i, i.nextSibling, this, e) : s.type === 1 ? t = new s.ctor(i, s.name, s.strings, this, e) : s.type === 6 && (t = new ge(i, this, e)), this._$AV.push(t), s = n[++o];
+				s.type === 2 ? t = new B(i, i.nextSibling, this, e) : s.type === 1 ? t = new s.ctor(i, s.name, s.strings, this, e) : s.type === 6 && (t = new ve(i, this, e)), this._$AV.push(t), s = n[++o];
 			}
-			a !== s?.index && (i = R.nextNode(), a++);
+			a !== s?.index && (i = L.nextNode(), a++);
 		}
-		return R.currentNode = E, r;
+		return L.currentNode = k, r;
 	}
 	p(e) {
 		let t = 0;
 		for (let n of this._$AV) n !== void 0 && (n.strings === void 0 ? n._$AI(e[t]) : (n._$AI(e, n, t), t += n.strings.length - 2)), t++;
 	}
-}, H = class e {
+}, B = class e {
 	get _$AU() {
 		return this._$AM?._$AU ?? this._$Cv;
 	}
 	constructor(e, t, n, r) {
-		this.type = 2, this._$AH = L, this._$AN = void 0, this._$AA = e, this._$AB = t, this._$AM = n, this.options = r, this._$Cv = r?.isConnected ?? !0;
+		this.type = 2, this._$AH = I, this._$AN = void 0, this._$AA = e, this._$AB = t, this._$AM = n, this.options = r, this._$Cv = r?.isConnected ?? !0;
 	}
 	get parentNode() {
 		let e = this._$AA.parentNode, t = this._$AM;
@@ -376,7 +376,7 @@ var fe = class {
 		return this._$AB;
 	}
 	_$AI(e, t = this) {
-		e = V(this, e, t), O(e) ? e === L || e == null || e === "" ? (this._$AH !== L && this._$AR(), this._$AH = L) : e !== this._$AH && e !== I && this._(e) : e._$litType$ === void 0 ? e.nodeType === void 0 ? oe(e) ? this.k(e) : this._(e) : this.T(e) : this.$(e);
+		e = z(this, e, t), j(e) ? e === I || e == null || e === "" ? (this._$AH !== I && this._$AR(), this._$AH = I) : e !== this._$AH && e !== F && this._(e) : e._$litType$ === void 0 ? e.nodeType === void 0 ? ie(e) ? this.k(e) : this._(e) : this.T(e) : this.$(e);
 	}
 	O(e) {
 		return this._$AA.parentNode.insertBefore(e, this._$AB);
@@ -385,36 +385,36 @@ var fe = class {
 		this._$AH !== e && (this._$AR(), this._$AH = this.O(e));
 	}
 	_(e) {
-		this._$AH !== L && O(this._$AH) ? this._$AA.nextSibling.data = e : this.T(E.createTextNode(e)), this._$AH = e;
+		this._$AH !== I && j(this._$AH) ? this._$AA.nextSibling.data = e : this.T(k.createTextNode(e)), this._$AH = e;
 	}
 	$(e) {
-		let { values: t, _$litType$: n } = e, r = typeof n == "number" ? this._$AC(e) : (n.el === void 0 && (n.el = B.createElement(z(n.h, n.h[0]), this.options)), n);
+		let { values: t, _$litType$: n } = e, r = typeof n == "number" ? this._$AC(e) : (n.el === void 0 && (n.el = R.createElement(fe(n.h, n.h[0]), this.options)), n);
 		if (this._$AH?._$AD === r) this._$AH.p(t);
 		else {
-			let e = new fe(r, this), n = e.u(this.options);
+			let e = new me(r, this), n = e.u(this.options);
 			e.p(t), this.T(n), this._$AH = e;
 		}
 	}
 	_$AC(e) {
-		let t = ue.get(e.strings);
-		return t === void 0 && ue.set(e.strings, t = new B(e)), t;
+		let t = de.get(e.strings);
+		return t === void 0 && de.set(e.strings, t = new R(e)), t;
 	}
 	k(t) {
-		k(this._$AH) || (this._$AH = [], this._$AR());
+		re(this._$AH) || (this._$AH = [], this._$AR());
 		let n = this._$AH, r, i = 0;
-		for (let a of t) i === n.length ? n.push(r = new e(this.O(D()), this.O(D()), this, this.options)) : r = n[i], r._$AI(a), i++;
+		for (let a of t) i === n.length ? n.push(r = new e(this.O(A()), this.O(A()), this, this.options)) : r = n[i], r._$AI(a), i++;
 		i < n.length && (this._$AR(r && r._$AB.nextSibling, i), n.length = i);
 	}
 	_$AR(e = this._$AA.nextSibling, t) {
 		for (this._$AP?.(!1, !0, t); e !== this._$AB;) {
-			let t = re(e).nextSibling;
-			re(e).remove(), e = t;
+			let t = T(e).nextSibling;
+			T(e).remove(), e = t;
 		}
 	}
 	setConnected(e) {
 		this._$AM === void 0 && (this._$Cv = e, this._$AP?.(e));
 	}
-}, U = class {
+}, V = class {
 	get tagName() {
 		return this.element.tagName;
 	}
@@ -422,47 +422,47 @@ var fe = class {
 		return this._$AM._$AU;
 	}
 	constructor(e, t, n, r, i) {
-		this.type = 1, this._$AH = L, this._$AN = void 0, this.element = e, this.name = t, this._$AM = r, this.options = i, n.length > 2 || n[0] !== "" || n[1] !== "" ? (this._$AH = Array(n.length - 1).fill(/* @__PURE__ */ new String()), this.strings = n) : this._$AH = L;
+		this.type = 1, this._$AH = I, this._$AN = void 0, this.element = e, this.name = t, this._$AM = r, this.options = i, n.length > 2 || n[0] !== "" || n[1] !== "" ? (this._$AH = Array(n.length - 1).fill(/* @__PURE__ */ new String()), this.strings = n) : this._$AH = I;
 	}
 	_$AI(e, t = this, n, r) {
 		let i = this.strings, a = !1;
-		if (i === void 0) e = V(this, e, t, 0), a = !O(e) || e !== this._$AH && e !== I, a && (this._$AH = e);
+		if (i === void 0) e = z(this, e, t, 0), a = !j(e) || e !== this._$AH && e !== F, a && (this._$AH = e);
 		else {
 			let r = e, o, s;
-			for (e = i[0], o = 0; o < i.length - 1; o++) s = V(this, r[n + o], t, o), s === I && (s = this._$AH[o]), a ||= !O(s) || s !== this._$AH[o], s === L ? e = L : e !== L && (e += (s ?? "") + i[o + 1]), this._$AH[o] = s;
+			for (e = i[0], o = 0; o < i.length - 1; o++) s = z(this, r[n + o], t, o), s === F && (s = this._$AH[o]), a ||= !j(s) || s !== this._$AH[o], s === I ? e = I : e !== I && (e += (s ?? "") + i[o + 1]), this._$AH[o] = s;
 		}
 		a && !r && this.j(e);
 	}
 	j(e) {
-		e === L ? this.element.removeAttribute(this.name) : this.element.setAttribute(this.name, e ?? "");
+		e === I ? this.element.removeAttribute(this.name) : this.element.setAttribute(this.name, e ?? "");
 	}
-}, pe = class extends U {
+}, he = class extends V {
 	constructor() {
 		super(...arguments), this.type = 3;
 	}
 	j(e) {
-		this.element[this.name] = e === L ? void 0 : e;
+		this.element[this.name] = e === I ? void 0 : e;
 	}
-}, me = class extends U {
+}, ge = class extends V {
 	constructor() {
 		super(...arguments), this.type = 4;
 	}
 	j(e) {
-		this.element.toggleAttribute(this.name, !!e && e !== L);
+		this.element.toggleAttribute(this.name, !!e && e !== I);
 	}
-}, he = class extends U {
+}, _e = class extends V {
 	constructor(e, t, n, r, i) {
 		super(e, t, n, r, i), this.type = 5;
 	}
 	_$AI(e, t = this) {
-		if ((e = V(this, e, t, 0) ?? L) === I) return;
-		let n = this._$AH, r = e === L && n !== L || e.capture !== n.capture || e.once !== n.once || e.passive !== n.passive, i = e !== L && (n === L || r);
+		if ((e = z(this, e, t, 0) ?? I) === F) return;
+		let n = this._$AH, r = e === I && n !== I || e.capture !== n.capture || e.once !== n.once || e.passive !== n.passive, i = e !== I && (n === I || r);
 		r && this.element.removeEventListener(this.name, this, n), i && this.element.addEventListener(this.name, this, e), this._$AH = e;
 	}
 	handleEvent(e) {
 		typeof this._$AH == "function" ? this._$AH.call(this.options?.host ?? this.element, e) : this._$AH.handleEvent(e);
 	}
-}, ge = class {
+}, ve = class {
 	constructor(e, t, n) {
 		this.element = e, this.type = 6, this._$AN = void 0, this._$AM = t, this.options = n;
 	}
@@ -470,18 +470,18 @@ var fe = class {
 		return this._$AM._$AU;
 	}
 	_$AI(e) {
-		V(this, e);
+		z(this, e);
 	}
-}, _e = x.litHtmlPolyfillSupport;
-_e?.(B, H), (x.litHtmlVersions ??= []).push("3.3.3");
-var ve = (e, t, n) => {
+}, ye = w.litHtmlPolyfillSupport;
+ye?.(R, B), (w.litHtmlVersions ??= []).push("3.3.3");
+var be = (e, t, n) => {
 	let r = n?.renderBefore ?? t, i = r._$litPart$;
 	if (i === void 0) {
 		let e = n?.renderBefore ?? null;
-		r._$litPart$ = i = new H(t.insertBefore(D(), e), e, void 0, n ?? {});
+		r._$litPart$ = i = new B(t.insertBefore(A(), e), e, void 0, n ?? {});
 	}
 	return i._$AI(e), i;
-}, W = globalThis, G = class extends b {
+}, H = globalThis, U = class extends C {
 	constructor() {
 		super(...arguments), this.renderOptions = { host: this }, this._$Do = void 0;
 	}
@@ -491,7 +491,7 @@ var ve = (e, t, n) => {
 	}
 	update(e) {
 		let t = this.render();
-		this.hasUpdated || (this.renderOptions.isConnected = this.isConnected), super.update(e), this._$Do = ve(t, this.renderRoot, this.renderOptions);
+		this.hasUpdated || (this.renderOptions.isConnected = this.isConnected), super.update(e), this._$Do = be(t, this.renderRoot, this.renderOptions);
 	}
 	connectedCallback() {
 		super.connectedCallback(), this._$Do?.setConnected(!0);
@@ -500,21 +500,21 @@ var ve = (e, t, n) => {
 		super.disconnectedCallback(), this._$Do?.setConnected(!1);
 	}
 	render() {
-		return I;
+		return F;
 	}
 };
-G._$litElement$ = !0, G.finalized = !0, W.litElementHydrateSupport?.({ LitElement: G });
-var ye = W.litElementPolyfillSupport;
-ye?.({ LitElement: G }), (W.litElementVersions ??= []).push("4.2.2");
+U._$litElement$ = !0, U.finalized = !0, H.litElementHydrateSupport?.({ LitElement: U });
+var xe = H.litElementPolyfillSupport;
+xe?.({ LitElement: U }), (H.litElementVersions ??= []).push("4.2.2");
 //#endregion
 //#region node_modules/@lit/reactive-element/decorators/property.js
-var be = {
+var Se = {
 	attribute: !0,
 	type: String,
-	converter: v,
+	converter: b,
 	reflect: !1,
-	hasChanged: y
-}, xe = (e = be, t, n) => {
+	hasChanged: x
+}, Ce = (e = Se, t, n) => {
 	let { kind: r, metadata: i } = n, a = globalThis.litPropertyMetadata.get(i);
 	if (a === void 0 && globalThis.litPropertyMetadata.set(i, a = /* @__PURE__ */ new Map()), r === "setter" && ((e = Object.create(e)).wrapped = !0), a.set(n.name, e), r === "accessor") {
 		let { name: r } = n;
@@ -537,16 +537,16 @@ var be = {
 	}
 	throw Error("Unsupported decorator location: " + r);
 };
-function K(e) {
-	return (t, n) => typeof n == "object" ? xe(e, t, n) : ((e, t, n) => {
+function W(e) {
+	return (t, n) => typeof n == "object" ? Ce(e, t, n) : ((e, t, n) => {
 		let r = t.hasOwnProperty(n);
 		return t.constructor.createProperty(n, e), r ? Object.getOwnPropertyDescriptor(t, n) : void 0;
 	})(e, t, n);
 }
 //#endregion
 //#region node_modules/@lit/reactive-element/decorators/state.js
-function q(e) {
-	return K({
+function G(e) {
+	return W({
 		...e,
 		state: !0,
 		attribute: !1
@@ -554,32 +554,36 @@ function q(e) {
 }
 //#endregion
 //#region src/config.ts
-var Se = ["outdoor_temperature", "indoor_temperature"], Ce = /^[a-z0-9_]+\.[a-z0-9_]+$/, we = /* @__PURE__ */ new Set([
+var we = ["outdoor_temperature", "indoor_temperature"], Te = /^[a-z0-9_]+\.[a-z0-9_]+$/, Ee = /* @__PURE__ */ new Set([
 	"auto",
 	"landscape",
 	"portrait"
-]);
-function Te(e) {
+]), De = /* @__PURE__ */ new Set(["hourly", "daily"]);
+function Oe(e) {
 	if (!e || typeof e != "object") throw Error("Weather Kiosk configuration is required.");
 	if (!e.entities || typeof e.entities != "object") throw Error("Weather Kiosk requires an entities mapping.");
-	for (let t of Se) if (!Ee(e.entities[t])) throw Error(`Weather Kiosk requires a valid entities.${t}.`);
-	for (let [t, n] of Object.entries(e.entities)) if (n !== void 0 && !Ee(n)) throw Error(`Invalid entity ID for entities.${t}: ${n}`);
+	for (let t of we) if (!ke(e.entities[t])) throw Error(`Weather Kiosk requires a valid entities.${t}.`);
+	for (let [t, n] of Object.entries(e.entities)) if (n !== void 0 && !ke(n)) throw Error(`Invalid entity ID for entities.${t}: ${n}`);
 	let t = e.layout ?? "auto";
-	if (!we.has(t)) throw Error(`Invalid layout: ${String(t)}`);
+	if (!Ee.has(t)) throw Error(`Invalid layout: ${String(t)}`);
 	if (e.pressure_trend_threshold !== void 0 && (!Number.isFinite(e.pressure_trend_threshold) || e.pressure_trend_threshold < 0)) throw Error("pressure_trend_threshold must be a non-negative number.");
+	if (e.forecast_entity !== void 0 && !ke(e.forecast_entity)) throw Error("forecast_entity must be a valid weather entity ID.");
+	let n = e.forecast_type ?? "hourly";
+	if (!De.has(n)) throw Error(`Invalid forecast_type: ${String(n)}`);
 	return {
 		...e,
 		type: e.type || "custom:weather-kiosk-card",
-		title: e.title?.trim() || "Weather",
+		title: e.title?.trim() || "",
+		forecast_type: n,
 		layout: t
 	};
 }
-function Ee(e) {
-	return typeof e == "string" && Ce.test(e);
+function ke(e) {
+	return typeof e == "string" && Te.test(e);
 }
 //#endregion
 //#region src/history.ts
-var De = [
+var Ae = [
 	{
 		hours: 6,
 		label: "6 h"
@@ -593,9 +597,9 @@ var De = [
 		label: "7 d"
 	}
 ];
-async function Oe(e, t, n, r = /* @__PURE__ */ new Date()) {
+async function je(e, t, n, r = /* @__PURE__ */ new Date()) {
 	let i = /* @__PURE__ */ new Date(r.getTime() - n * 60 * 60 * 1e3);
-	return ke(await e.callWS({
+	return Me(await e.callWS({
 		type: "history/history_during_period",
 		start_time: i.toISOString(),
 		end_time: r.toISOString(),
@@ -604,50 +608,143 @@ async function Oe(e, t, n, r = /* @__PURE__ */ new Date()) {
 		no_attributes: !0
 	}), t);
 }
-function ke(e, t) {
+function Me(e, t) {
 	let n = (e[t] ?? []).map((e) => ({
 		timestamp: (e.lc ?? e.lu) * 1e3,
 		value: Number(e.s)
 	})).filter((e) => Number.isFinite(e.timestamp) && Number.isFinite(e.value)).sort((e, t) => e.timestamp - t.timestamp);
 	return n.filter((e, t) => t === 0 || e.timestamp !== n[t - 1]?.timestamp || e.value !== n[t - 1]?.value);
 }
-function Ae(e, t = 800, n = 300, r = 18) {
-	if (e.length === 0) return;
-	let i = je(e, 600), a = i.map((e) => e.value), o = Math.min(...a), s = Math.max(...a), c = Math.max((s - o) * .08, .1), l = o - c, u = s + c, d = i[0].timestamp, f = Math.max(i[i.length - 1].timestamp, d + 1), p = t - r * 2, ee = n - r * 2, m = i.map((e) => ({
-		x: r + (e.timestamp - d) / (f - d) * p,
-		y: r + (u - e.value) / (u - l) * ee
-	})), h = m.map(({ x: e, y: t }) => `${e.toFixed(1)},${t.toFixed(1)}`).join(" "), te = m[0], g = m[m.length - 1];
+function Ne(e, t, n, r, i = 800, a = 300, o = 18) {
+	let s = n - r * 60 * 60 * 1e3, c = n + r * 60 * 60 * 1e3, l = e.filter((e) => e.timestamp >= s && e.timestamp <= n), u = t.filter((e) => e.timestamp >= n && e.timestamp <= c), d = [...l, ...u];
+	if (!d.length) return;
+	let f = d.map((e) => e.value), p = Math.min(...f), m = Math.max(...f), h = Math.max((m - p) * .08, .1), g = p - h, _ = m + h, v = i - o * 2, y = a - o * 2, b = (e) => e.map((e) => ({
+		x: o + (e.timestamp - s) / (c - s) * v,
+		y: o + (_ - e.value) / (_ - g) * y
+	})), x = b(l), S = b(l.length && u.length ? [{
+		timestamp: n,
+		value: l[l.length - 1].value
+	}, ...u] : u), C = (e) => e.map(({ x: e, y: t }) => `${e.toFixed(1)},${t.toFixed(1)}`).join(" "), w = C(x), T = C(S), E = x[0] ?? S[0], D = x[x.length - 1] ?? S[0];
 	return {
-		points: h,
-		area: `${te.x.toFixed(1)},${n - r} ${h} ${g.x.toFixed(1)},${n - r}`,
+		points: w,
+		forecastPoints: T,
+		area: w ? `${E.x.toFixed(1)},${a - o} ${w} ${D.x.toFixed(1)},${a - o}` : "",
+		minimum: p,
+		maximum: m,
+		start: s,
+		end: c,
+		latestX: D.x,
+		latestY: D.y,
+		nowX: i / 2
+	};
+}
+function Pe(e, t = 800, n = 300, r = 18) {
+	if (e.length === 0) return;
+	let i = Fe(e, 600), a = i.map((e) => e.value), o = Math.min(...a), s = Math.max(...a), c = Math.max((s - o) * .08, .1), l = o - c, u = s + c, d = i[0].timestamp, f = Math.max(i[i.length - 1].timestamp, d + 1), p = t - r * 2, m = n - r * 2, h = i.map((e) => ({
+		x: r + (e.timestamp - d) / (f - d) * p,
+		y: r + (u - e.value) / (u - l) * m
+	})), g = h.map(({ x: e, y: t }) => `${e.toFixed(1)},${t.toFixed(1)}`).join(" "), _ = h[0], v = h[h.length - 1];
+	return {
+		points: g,
+		area: `${_.x.toFixed(1)},${n - r} ${g} ${v.x.toFixed(1)},${n - r}`,
 		minimum: o,
 		maximum: s,
 		start: d,
 		end: f,
-		latestX: g.x,
-		latestY: g.y
+		latestX: v.x,
+		latestY: v.y
 	};
 }
-function je(e, t) {
+function Fe(e, t) {
 	if (e.length <= t) return e;
 	let n = (e.length - 1) / (t - 1);
 	return Array.from({ length: t }, (t, r) => e[Math.round(r * n)]);
 }
 //#endregion
+//#region src/forecast.ts
+async function Ie(e, t, n) {
+	let r = await e.callWS({
+		type: "call_service",
+		domain: "weather",
+		service: "get_forecasts",
+		service_data: { type: n },
+		target: { entity_id: t },
+		return_response: !0
+	});
+	return ((r.response ?? r)[t]?.forecast ?? []).filter((e) => Number.isFinite(new Date(e.datetime).getTime()));
+}
+function Le(e, t, n, r, i, a) {
+	return e.flatMap((e) => {
+		let o = new Date(e.datetime).getTime();
+		if (!Number.isFinite(o) || o < i || o > a) return [];
+		let s = Be(e, t);
+		if (s === void 0) return [];
+		let c = Ve(s, n, r, t);
+		return c === void 0 ? [] : [{
+			timestamp: o,
+			value: c
+		}];
+	});
+}
+function Re(e, t, n, r, i, a) {
+	let o = Le(e, t, n, r, i, a).map((e) => e.value);
+	if (t === "temperature") for (let s of e) {
+		let e = new Date(s.datetime).getTime();
+		if (e < i || e > a || typeof s.templow != "number" || !Number.isFinite(s.templow)) continue;
+		let c = Ve(s.templow, n, r, t);
+		c !== void 0 && o.push(c);
+	}
+	if (o.length) return {
+		minimum: Math.min(...o),
+		maximum: Math.max(...o)
+	};
+}
+function ze(e, t) {
+	return e === "temperature" ? t.temperature : e === "pressure" ? t.pressure : e === "wind_speed" ? t.wind_speed : e === "humidity" ? "%" : "°";
+}
+function Be(e, t) {
+	if (t === "wind_bearing") {
+		let t = Number(e.wind_bearing);
+		return Number.isFinite(t) ? t : void 0;
+	}
+	let n = e[t];
+	return typeof n == "number" && Number.isFinite(n) ? n : void 0;
+}
+function Ve(e, t, n, r) {
+	if (!t || !n || K(t) === K(n)) return e;
+	let i = K(t), a = K(n);
+	if (r === "temperature") {
+		let t = i === "°f" ? (e - 32) * (5 / 9) : i === "°c" ? e : void 0;
+		return t === void 0 ? void 0 : a === "°f" ? 9 / 5 * t + 32 : a === "°c" ? t : void 0;
+	}
+	if (r === "pressure") {
+		let t = i === "hpa" || i === "mbar" ? e : i === "kpa" ? e * 10 : i === "inhg" ? e * 33.8638866667 : i === "psi" ? e * 68.9475729 : void 0;
+		return t === void 0 ? void 0 : a === "hpa" || a === "mbar" ? t : a === "kpa" ? t / 10 : a === "inhg" ? t / 33.8638866667 : a === "psi" ? t / 68.9475729 : void 0;
+	}
+	if (r === "wind_speed") {
+		let t = i === "m/s" ? e : i === "km/h" ? e / 3.6 : i === "mph" ? e * .44704 : i === "kn" || i === "kt" ? e * .514444 : void 0;
+		return t === void 0 ? void 0 : a === "m/s" ? t : a === "km/h" ? t * 3.6 : a === "mph" ? t / .44704 : a === "kn" || a === "kt" ? t / .514444 : void 0;
+	}
+	return r === "humidity" || r === "wind_bearing" ? e : void 0;
+}
+function K(e) {
+	return e.trim().toLowerCase().replace("kph", "km/h");
+}
+//#endregion
 //#region src/format.ts
-var Me = /* @__PURE__ */ new Set([
+var He = /* @__PURE__ */ new Set([
 	"unknown",
 	"unavailable",
 	"none",
 	""
 ]);
-function J(e) {
-	if (!e || Me.has(e.state.toLowerCase())) return;
+function q(e) {
+	if (!e || He.has(e.state.toLowerCase())) return;
 	let t = Number(e.state);
 	return Number.isFinite(t) ? t : void 0;
 }
-function Y(e, t, n = 1) {
-	let r = J(e);
+function J(e, t, n = 1) {
+	let r = q(e);
 	return r === void 0 ? {
 		value: "—",
 		unit: e?.attributes.unit_of_measurement ?? "",
@@ -661,9 +758,18 @@ function Y(e, t, n = 1) {
 		available: !0
 	};
 }
-function Ne(e) {
+function Ue(e, t = "en") {
 	if (e === void 0) return "—";
-	let t = [
+	let n = t.toLowerCase().startsWith("da") ? [
+		"N",
+		"NØ",
+		"Ø",
+		"SØ",
+		"S",
+		"SV",
+		"V",
+		"NV"
+	] : [
 		"N",
 		"NE",
 		"E",
@@ -672,12 +778,156 @@ function Ne(e) {
 		"SW",
 		"W",
 		"NW"
-	], n = (e % 360 + 360) % 360;
-	return t[Math.round(n / 45) % 8] ?? "—";
+	], r = (e % 360 + 360) % 360;
+	return n[Math.round(r / 45) % 8] ?? "—";
+}
+//#endregion
+//#region src/localize.ts
+var We = {
+	defaultTitle: "Weather",
+	cardName: "Weather Kiosk",
+	cardDescription: "A full-screen weather station card for wall-mounted displays.",
+	temperatures: "Temperatures",
+	weatherDetails: "Weather details",
+	outdoor: "Outdoor",
+	indoor: "Indoor",
+	temperature: "temperature",
+	humidity: "Humidity",
+	pressure: "Pressure",
+	rainNow: "Rain now",
+	rain24h: "Rain · 24 h",
+	wind: "Wind",
+	windSpeed: "Wind speed",
+	windDirection: "Wind direction",
+	rising: "rising",
+	steady: "steady",
+	falling: "falling",
+	trendUnavailable: "Trend unavailable",
+	history: "History",
+	closeHistory: "Close history",
+	historyRange: "History range",
+	loadingHistory: "Loading history…",
+	now: "Now",
+	noHistory: "No recorded numeric history for this period.",
+	entityDetails: "Entity details",
+	historyError: "History could not be loaded. Check that Recorder includes this entity.",
+	forecast: "Forecast",
+	forecast24h: "Next 24 h",
+	minimumAbbreviation: "min",
+	maximumAbbreviation: "max",
+	showHistory: (e) => `Show ${e.toLowerCase()} history`,
+	historyGraph: (e) => `${e} history graph`,
+	editor: {
+		display: "Display",
+		displayDescription: "Choose the heading and how the card responds to its available space.",
+		title: "Title",
+		layout: "Layout",
+		automatic: "Automatic",
+		landscape: "Landscape",
+		portrait: "Portrait",
+		temperatures: "Temperatures",
+		temperaturesDescription: "Both temperature sensors are required and shown at equal size.",
+		humidity: "Humidity",
+		humidityDescription: "Optional humidity readings shown with their matching temperature.",
+		weatherDetails: "Weather details",
+		weatherDetailsDescription: "Optional pressure, rain, and wind readings.",
+		outdoorTemperature: "Outdoor temperature",
+		indoorTemperature: "Indoor temperature",
+		outdoorHumidity: "Outdoor humidity",
+		indoorHumidity: "Indoor humidity",
+		pressure: "Pressure",
+		currentRainRate: "Current rain rate",
+		rain24h: "Rain over the last 24 hours",
+		windSpeed: "Wind speed",
+		windDirection: "Wind direction",
+		pressureTrend: "Pressure trend",
+		pressureTrendDescription: "Leave blank to use the automatic threshold for the pressure unit.",
+		steadyThreshold: "Steady threshold",
+		automaticThreshold: "Automatic",
+		pressureUnitHelper: "Uses the configured pressure sensor's unit.",
+		forecast: "Forecast",
+		forecastDescription: "Select a weather entity. Outdoor graphs then place now at the center, with history before it and forecast after it.",
+		forecastEntity: "Weather entity",
+		forecastType: "Forecast resolution",
+		hourly: "Hourly",
+		daily: "Daily"
+	}
+}, Ge = {
+	defaultTitle: "Vejret",
+	cardName: "Vejrkiosk",
+	cardDescription: "Et vejrstationskort i fuld skærm til vægmonterede skærme.",
+	temperatures: "Temperaturer",
+	weatherDetails: "Vejrdata",
+	outdoor: "Ude",
+	indoor: "Inde",
+	temperature: "temperatur",
+	humidity: "Luftfugtighed",
+	pressure: "Lufttryk",
+	rainNow: "Regn nu",
+	rain24h: "Regn · 24 t",
+	wind: "Vind",
+	windSpeed: "Vindhastighed",
+	windDirection: "Vindretning",
+	rising: "stigende",
+	steady: "stabilt",
+	falling: "faldende",
+	trendUnavailable: "Trend ikke tilgængelig",
+	history: "Historik",
+	closeHistory: "Luk historik",
+	historyRange: "Tidsinterval for historik",
+	loadingHistory: "Indlæser historik…",
+	now: "Nu",
+	noHistory: "Der er ingen registrerede numeriske data for perioden.",
+	entityDetails: "Entitetsoplysninger",
+	historyError: "Historikken kunne ikke indlæses. Kontrollér, at Recorder medtager denne entitet.",
+	forecast: "Prognose",
+	forecast24h: "Næste 24 t",
+	minimumAbbreviation: "min.",
+	maximumAbbreviation: "maks.",
+	showHistory: (e) => `Vis historik for ${e.toLowerCase()}`,
+	historyGraph: (e) => `Historikgraf for ${e.toLowerCase()}`,
+	editor: {
+		display: "Visning",
+		displayDescription: "Vælg overskrift, og hvordan kortet tilpasses den tilgængelige plads.",
+		title: "Titel",
+		layout: "Layout",
+		automatic: "Automatisk",
+		landscape: "Liggende",
+		portrait: "Stående",
+		temperatures: "Temperaturer",
+		temperaturesDescription: "Begge temperatursensorer er påkrævede og vises lige store.",
+		humidity: "Luftfugtighed",
+		humidityDescription: "Valgfri luftfugtighed, som vises sammen med den tilhørende temperatur.",
+		weatherDetails: "Vejrdata",
+		weatherDetailsDescription: "Valgfri målinger af lufttryk, regn og vind.",
+		outdoorTemperature: "Udendørstemperatur",
+		indoorTemperature: "Indendørstemperatur",
+		outdoorHumidity: "Udendørs luftfugtighed",
+		indoorHumidity: "Indendørs luftfugtighed",
+		pressure: "Lufttryk",
+		currentRainRate: "Aktuel regnintensitet",
+		rain24h: "Regn de seneste 24 timer",
+		windSpeed: "Vindhastighed",
+		windDirection: "Vindretning",
+		pressureTrend: "Lufttrykstrend",
+		pressureTrendDescription: "Lad feltet stå tomt for at bruge den automatiske grænse for lufttryksenheden.",
+		steadyThreshold: "Grænse for stabilt lufttryk",
+		automaticThreshold: "Automatisk",
+		pressureUnitHelper: "Bruger den konfigurerede lufttrykssensors enhed.",
+		forecast: "Prognose",
+		forecastDescription: "Vælg en vejrentitet. Udendørsgrafer placerer derefter nu i midten med historik før og prognose efter.",
+		forecastEntity: "Vejrentitet",
+		forecastType: "Prognoseopløsning",
+		hourly: "Timevis",
+		daily: "Daglig"
+	}
+};
+function Y(e) {
+	return e?.toLowerCase().split(/[-_]/)[0] === "da" ? Ge : We;
 }
 //#endregion
 //#region src/styles.ts
-var Pe = o`
+var Ke = o`
   :host {
     display: block;
     height: 100%;
@@ -826,6 +1076,24 @@ var Pe = o`
   .secondary-value strong {
     color: var(--primary-text-color);
     font-weight: 500;
+  }
+
+  .forecast-range {
+    display: block;
+    margin-top: 0.45em;
+    color: var(--secondary-text-color);
+    font-size: clamp(10px, 1.2vmin, 15px);
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.25;
+    text-transform: none;
+  }
+
+  .secondary-value .forecast-range {
+    display: inline;
+    margin: 0 0 0 0.4em;
+    font-size: 0.62em;
   }
 
   .metrics {
@@ -1037,6 +1305,23 @@ var Pe = o`
     vector-effect: non-scaling-stroke;
   }
 
+  .forecast-line {
+    fill: none;
+    stroke: var(--accent-color, var(--primary-color));
+    stroke-dasharray: 9 7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 4;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .now-line {
+    stroke: var(--secondary-text-color);
+    stroke-dasharray: 3 5;
+    stroke-width: 1.5;
+    vector-effect: non-scaling-stroke;
+  }
+
   .latest-point {
     fill: var(--primary-color);
     stroke: var(--ha-card-background, var(--card-background-color));
@@ -1069,6 +1354,21 @@ var Pe = o`
     justify-content: space-between;
     color: var(--secondary-text-color);
     font-size: 12px;
+  }
+
+  .chart-legend {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 7px;
+    margin-top: 5px;
+    color: var(--secondary-text-color);
+    font-size: 11px;
+  }
+
+  .chart-legend span {
+    width: 24px;
+    border-top: 3px dashed var(--accent-color, var(--primary-color));
   }
 
   .chart-message {
@@ -1175,9 +1475,9 @@ function X(e, t, n, r) {
 }
 //#endregion
 //#region src/weather-kiosk-card.ts
-var Z = class extends G {
+var Z = class extends U {
 	constructor(...e) {
-		super(...e), this.historyPoints = [], this.historyLoading = !1, this.historyRequest = 0, this.pressureFetchedAt = 0, this.closeHistory = () => {
+		super(...e), this.historyPoints = [], this.historyLoading = !1, this.forecast = [], this.historyRequest = 0, this.pressureFetchedAt = 0, this.forecastFetchedAt = 0, this.closeHistory = () => {
 			this.historyRequest += 1, this.activeHistory = void 0;
 		}, this.handleBackdropClick = (e) => {
 			e.target === e.currentTarget && this.closeHistory();
@@ -1186,10 +1486,10 @@ var Z = class extends G {
 		};
 	}
 	static {
-		this.styles = Pe;
+		this.styles = Ke;
 	}
 	setConfig(e) {
-		this.config = Te(e), this.pressureRequestKey = void 0, this.pressureEntityId = void 0, this.pressureFetchedAt = 0;
+		this.config = Oe(e), this.pressureRequestKey = void 0, this.pressureEntityId = void 0, this.pressureFetchedAt = 0, this.forecastRequestKey = void 0, this.forecastFetchedAt = 0, this.forecast = [];
 	}
 	getCardSize() {
 		return 9;
@@ -1204,7 +1504,7 @@ var Z = class extends G {
 	}
 	static getStubConfig() {
 		return {
-			title: "Weather",
+			title: Y(typeof document > "u" ? "en" : document.documentElement.lang).defaultTitle,
 			entities: {
 				outdoor_temperature: "sensor.outdoor_temperature",
 				indoor_temperature: "sensor.indoor_temperature"
@@ -1221,23 +1521,23 @@ var Z = class extends G {
 		window.removeEventListener("keydown", this.handleKeydown), super.disconnectedCallback();
 	}
 	updated(e) {
-		this.loadPressureTrend();
+		this.loadPressureTrend(), this.loadForecast();
 	}
 	render() {
-		if (!this.config || !this.hass) return F`<ha-card aria-busy="true"></ha-card>`;
-		let e = this.config.entities;
-		return F`
+		if (!this.config || !this.hass) return P`<ha-card aria-busy="true"></ha-card>`;
+		let e = this.config.entities, t = this.translations;
+		return P`
       <ha-card>
         <main class="kiosk ${this.config.layout}">
-          <header><h1>${this.config.title}</h1></header>
-          <section class="temperatures" aria-label="Temperatures">
-            ${this.renderTemperature("Outdoor", e.outdoor_temperature, e.outdoor_humidity)}
-            ${this.renderTemperature("Indoor", e.indoor_temperature, e.indoor_humidity)}
+          <header><h1>${this.config.title || t.defaultTitle}</h1></header>
+          <section class="temperatures" aria-label=${t.temperatures}>
+            ${this.renderTemperature(t.outdoor, t.editor.outdoorTemperature, e.outdoor_temperature, e.outdoor_humidity, !0)}
+            ${this.renderTemperature(t.indoor, t.editor.indoorTemperature, e.indoor_temperature, e.indoor_humidity, !1)}
           </section>
-          <section class="metrics" aria-label="Weather details">
+          <section class="metrics" aria-label=${t.weatherDetails}>
             ${this.renderPressure(e.pressure)}
-            ${this.renderMetric("Rain now", e.rain_rate)}
-            ${this.renderMetric("Rain · 24 h", e.rain_24h)}
+            ${this.renderMetric(t.rainNow, e.rain_rate)}
+            ${this.renderMetric(t.rain24h, e.rain_24h)}
             ${this.renderWind(e.wind_speed, e.wind_direction)}
           </section>
         </main>
@@ -1245,93 +1545,98 @@ var Z = class extends G {
       </ha-card>
     `;
 	}
-	renderTemperature(e, t, n) {
-		let r = Y(this.entity(t), this.language, 1), i = n ? Y(this.entity(n), this.language, 0) : void 0;
-		return F`
-      <article class="temperature ${r.available ? "" : "unavailable"}">
+	renderTemperature(e, t, n, r, i = !1) {
+		let a = J(this.entity(n), this.language, 1), o = r ? J(this.entity(r), this.language, 0) : void 0;
+		return P`
+      <article class="temperature ${a.available ? "" : "unavailable"}">
         <button
           class="temperature-main"
           type="button"
-          aria-label="Show ${e.toLowerCase()} temperature history"
-          @click=${() => this.openHistory(t, `${e} temperature`)}
+          aria-label=${this.translations.showHistory(t)}
+          @click=${() => this.openHistory(n, t, i ? "temperature" : void 0)}
         >
           <span class="label">${e}</span>
           <span class="temperature-value">
-            ${r.value}<span class="unit">${r.unit}</span>
+            ${a.value}<span class="unit">${a.unit}</span>
           </span>
+          ${i ? this.renderForecastRange("temperature", n) : I}
         </button>
-        ${n && i ? F`
+        ${r && o ? P`
               <button
                 class="secondary-value"
                 type="button"
-                aria-label="Show ${e.toLowerCase()} humidity history"
-                @click=${() => this.openHistory(n, `${e} humidity`)}
+                aria-label=${this.translations.showHistory(e === this.translations.outdoor ? this.translations.editor.outdoorHumidity : this.translations.editor.indoorHumidity)}
+                @click=${() => this.openHistory(r, e === this.translations.outdoor ? this.translations.editor.outdoorHumidity : this.translations.editor.indoorHumidity, i ? "humidity" : void 0)}
               >
-                <span>Humidity</span>
-                <strong>${i.value}${i.unit}</strong>
+                <span>${this.translations.humidity}</span>
+                <strong>${o.value}${o.unit}</strong>
+                ${i ? this.renderForecastRange("humidity", r) : I}
               </button>
-            ` : L}
+            ` : I}
       </article>
     `;
 	}
-	renderMetric(e, t) {
-		if (!t) return F`
+	renderMetric(e, t, n) {
+		if (!t) return P`
         <div class="metric unavailable">
           <span class="label">${e}</span>
           <span class="metric-value">—</span>
         </div>
       `;
-		let n = Y(this.entity(t), this.language, 1);
-		return F`
+		let r = J(this.entity(t), this.language, 1);
+		return P`
       <button
-        class="metric ${n.available ? "" : "unavailable"}"
+        class="metric ${r.available ? "" : "unavailable"}"
         type="button"
-        aria-label="Show ${e.toLowerCase()} history"
-        @click=${() => this.openHistory(t, e)}
+        aria-label=${this.translations.showHistory(e)}
+        @click=${() => this.openHistory(t, e, n)}
       >
         <span class="label">${e}</span>
         <span class="metric-value">
-          ${n.value}<span class="unit">${n.unit}</span>
+          ${r.value}<span class="unit">${r.unit}</span>
         </span>
+        ${n ? this.renderForecastRange(n, t) : I}
       </button>
     `;
 	}
 	renderPressure(e) {
-		if (!e) return this.renderMetric("Pressure");
-		let t = Y(this.entity(e), this.language, 1), n = this.pressureTrend, r = n?.direction === "rising" ? "↗" : n?.direction === "falling" ? "↘" : "→", i = n ? `${n.direction} ${this.formatDelta(n.delta)}${t.unit} / 3 h` : "Trend unavailable";
-		return F`
+		let t = this.translations;
+		if (!e) return this.renderMetric(t.pressure);
+		let n = J(this.entity(e), this.language, 1), r = this.pressureTrend, i = r?.direction === "rising" ? "↗" : r?.direction === "falling" ? "↘" : "→", a = r ? t[r.direction] : void 0, o = r ? `${a} ${this.formatDelta(r.delta)}${n.unit} / 3 h` : t.trendUnavailable;
+		return P`
       <button
-        class="metric ${t.available ? "" : "unavailable"}"
+        class="metric ${n.available ? "" : "unavailable"}"
         type="button"
-        aria-label="Show pressure history"
-        @click=${() => this.openHistory(e, "Pressure")}
+        aria-label=${t.showHistory(t.pressure)}
+        @click=${() => this.openHistory(e, t.pressure, "pressure")}
       >
-        <span class="label">Pressure</span>
+        <span class="label">${t.pressure}</span>
         <span class="metric-value">
-          ${t.value}<span class="unit">${t.unit}</span>
+          ${n.value}<span class="unit">${n.unit}</span>
         </span>
-        <span class="trend ${n?.direction ?? ""}">
-          <span aria-hidden="true">${r}</span> ${i}
+        <span class="trend ${r?.direction ?? ""}">
+          <span aria-hidden="true">${i}</span> ${o}
         </span>
+        ${this.renderForecastRange("pressure", e)}
       </button>
     `;
 	}
 	renderWind(e, t) {
-		let n = e ? Y(this.entity(e), this.language, 1) : {
+		let n = e ? J(this.entity(e), this.language, 1) : {
 			value: "—",
 			unit: "",
 			available: !1
-		}, r = t ? J(this.entity(t)) : void 0;
-		return F`
+		}, r = t ? q(this.entity(t)) : void 0;
+		return P`
       <article class="metric wind ${n.available ? "" : "unavailable"}">
-        <span class="label">Wind</span>
+        <span class="label">${this.translations.wind}</span>
         <div class="wind-values">
-          ${t ? F`
+          ${t ? P`
                 <button
                   class="wind-direction"
                   type="button"
-                  aria-label="Show wind direction history"
-                  @click=${() => this.openHistory(t, "Wind direction")}
+                  aria-label=${this.translations.showHistory(this.translations.windDirection)}
+                  @click=${() => this.openHistory(t, this.translations.windDirection, "wind_bearing")}
                 >
                   <span
                     class="wind-arrow"
@@ -1339,31 +1644,34 @@ var Z = class extends G {
                     aria-hidden="true"
                     >↑</span
                   >
-                  <span class="direction-label">${Ne(r)}</span>
+                  <span class="direction-label"
+                    >${Ue(r, this.language)}</span
+                  >
                 </button>
-              ` : F`<span class="wind-arrow">↑</span>`}
-          ${e ? F`
+              ` : P`<span class="wind-arrow">↑</span>`}
+          ${e ? P`
                 <button
                   class="wind-speed"
                   type="button"
-                  aria-label="Show wind speed history"
-                  @click=${() => this.openHistory(e, "Wind speed")}
+                  aria-label=${this.translations.showHistory(this.translations.windSpeed)}
+                  @click=${() => this.openHistory(e, this.translations.windSpeed, "wind_speed")}
                 >
                   ${n.value}<span class="unit">${n.unit}</span>
+                  ${this.renderForecastRange("wind_speed", e)}
                 </button>
-              ` : F`<span class="wind-speed">—</span>`}
+              ` : P`<span class="wind-speed">—</span>`}
         </div>
       </article>
     `;
 	}
 	renderHistoryDialog() {
-		if (!this.activeHistory) return L;
-		let e = this.entity(this.activeHistory.entityId), t = Y(e, this.language, 1), n = Ae(this.historyPoints), r = new Intl.DateTimeFormat(this.language, {
+		if (!this.activeHistory) return I;
+		let e = this.entity(this.activeHistory.entityId), t = J(e, this.language, 1), n = Date.now(), r = this.activeHistory.forecastMetric ? this.forecastPointsFor(this.activeHistory.forecastMetric, e?.attributes.unit_of_measurement, n, n + this.activeHistory.hours * 60 * 60 * 1e3) : [], i = this.activeHistory.forecastMetric && this.config?.forecast_entity ? Ne(this.historyPoints, r, n, this.activeHistory.hours) : void 0, a = i ?? Pe(this.historyPoints), o = !!i?.forecastPoints, s = new Intl.DateTimeFormat(this.language, {
 			weekday: this.activeHistory.hours >= 168 ? "short" : void 0,
 			hour: "2-digit",
 			minute: "2-digit"
-		}), i = new Intl.NumberFormat(this.language, { maximumFractionDigits: 1 });
-		return F`
+		}), c = new Intl.NumberFormat(this.language, { maximumFractionDigits: 1 });
+		return P`
       <div
         class="history-backdrop"
         @click=${this.handleBackdropClick}
@@ -1377,7 +1685,7 @@ var Z = class extends G {
         >
           <header class="dialog-header">
             <div>
-              <span class="dialog-eyebrow">History</span>
+              <span class="dialog-eyebrow">${this.translations.history}</span>
               <h2 id="history-title">${this.activeHistory.label}</h2>
             </div>
             <div class="dialog-current">
@@ -1386,15 +1694,15 @@ var Z = class extends G {
             <button
               class="close-button"
               type="button"
-              aria-label="Close history"
+              aria-label=${this.translations.closeHistory}
               @click=${this.closeHistory}
             >
               ×
             </button>
           </header>
 
-          <nav class="range-selector" aria-label="History range">
-            ${De.map((e) => F`
+          <nav class="range-selector" aria-label=${this.translations.historyRange}>
+            ${Ae.map((e) => P`
                 <button
                   type="button"
                   class=${e.hours === this.activeHistory?.hours ? "selected" : ""}
@@ -1407,19 +1715,19 @@ var Z = class extends G {
           </nav>
 
           <div class="chart-frame" aria-live="polite">
-            ${this.historyLoading ? F`<div class="chart-message"><span class="spinner"></span>Loading history…</div>` : this.historyError ? F`<div class="chart-message error">${this.historyError}</div>` : n ? F`
+            ${this.historyLoading ? P`<div class="chart-message"><span class="spinner"></span>${this.translations.loadingHistory}</div>` : this.historyError ? P`<div class="chart-message error">${this.historyError}</div>` : a ? P`
                       <div class="chart-y-label max">
-                        ${i.format(n.maximum)} ${t.unit}
+                        ${c.format(a.maximum)} ${t.unit}
                       </div>
                       <div class="chart-y-label min">
-                        ${i.format(n.minimum)} ${t.unit}
+                        ${c.format(a.minimum)} ${t.unit}
                       </div>
                       <svg
                         class="history-chart"
                         viewBox="0 0 800 300"
                         preserveAspectRatio="none"
                         role="img"
-                        aria-label="${this.activeHistory.label} history graph"
+                        aria-label=${this.translations.historyGraph(this.activeHistory.label)}
                       >
                         <defs>
                           <linearGradient id="history-fill" x1="0" y1="0" x2="0" y2="1">
@@ -1430,21 +1738,25 @@ var Z = class extends G {
                         <line class="grid-line" x1="18" y1="18" x2="782" y2="18"></line>
                         <line class="grid-line" x1="18" y1="150" x2="782" y2="150"></line>
                         <line class="grid-line" x1="18" y1="282" x2="782" y2="282"></line>
-                        <polygon class="chart-area" points=${n.area}></polygon>
-                        <polyline class="chart-line" points=${n.points}></polyline>
-                        <circle class="latest-point" cx=${n.latestX} cy=${n.latestY} r="5"></circle>
+                        ${o ? P`<line class="now-line" x1="400" y1="18" x2="400" y2="282"></line>` : I}
+                        <polygon class="chart-area" points=${a.area}></polygon>
+                        <polyline class="chart-line" points=${a.points}></polyline>
+                        ${o ? P`<polyline class="forecast-line" points=${i.forecastPoints}></polyline>` : I}
+                        <circle class="latest-point" cx=${a.latestX} cy=${a.latestY} r="5"></circle>
                       </svg>
                       <div class="chart-x-labels">
-                        <span>${r.format(n.start)}</span>
-                        <span>Now</span>
+                        <span>${s.format(a.start)}</span>
+                        ${o ? P`<span>${this.translations.now}</span>` : I}
+                        <span>${o ? s.format(a.end) : this.translations.now}</span>
                       </div>
-                    ` : F`<div class="chart-message">No recorded numeric history for this period.</div>`}
+                      ${o ? P`<div class="chart-legend"><span></span>${this.translations.forecast}</div>` : I}
+                    ` : P`<div class="chart-message">${this.translations.noHistory}</div>`}
           </div>
 
           <footer class="dialog-footer">
             <span>${e?.attributes.friendly_name ?? this.activeHistory.entityId}</span>
             <button type="button" @click=${() => this.showMoreInfo(this.activeHistory.entityId)}>
-              Entity details
+              ${this.translations.entityDetails}
             </button>
           </footer>
         </section>
@@ -1457,12 +1769,52 @@ var Z = class extends G {
 	get language() {
 		return this.hass?.locale?.language ?? this.hass?.language ?? "en";
 	}
-	openHistory(e, t) {
+	get translations() {
+		return Y(this.language);
+	}
+	openHistory(e, t, n) {
 		this.activeHistory = {
 			entityId: e,
 			label: t,
-			hours: 24
+			hours: 24,
+			forecastMetric: n
 		}, this.historyPoints = [], this.historyError = void 0, this.loadActiveHistory();
+	}
+	renderForecastRange(e, t) {
+		if (!this.config?.forecast_entity || e === "wind_bearing") return I;
+		let n = this.entity(t), r = Date.now(), i = Re(this.forecast, e, ze(e, this.forecastUnits), n?.attributes.unit_of_measurement, r, r + 864e5);
+		if (!i) return I;
+		let a = new Intl.NumberFormat(this.language, { maximumFractionDigits: 1 });
+		return P`<span class="forecast-range">
+      ${this.translations.forecast24h} · ${this.translations.minimumAbbreviation}
+      ${a.format(i.minimum)} · ${this.translations.maximumAbbreviation}
+      ${a.format(i.maximum)}
+    </span>`;
+	}
+	forecastPointsFor(e, t, n, r) {
+		return Le(this.forecast, e, ze(e, this.forecastUnits), typeof t == "string" ? t : void 0, n, r);
+	}
+	get forecastUnits() {
+		let e = this.entity(this.config?.forecast_entity)?.attributes;
+		return {
+			temperature: typeof e?.temperature_unit == "string" ? e.temperature_unit : void 0,
+			pressure: typeof e?.pressure_unit == "string" ? e.pressure_unit : void 0,
+			wind_speed: typeof e?.wind_speed_unit == "string" ? e.wind_speed_unit : void 0
+		};
+	}
+	async loadForecast() {
+		let e = this.config?.forecast_entity, t = this.config?.forecast_type, n = this.hass;
+		if (!n || !e || !t) return;
+		let r = Date.now();
+		if (r - this.forecastFetchedAt < 18e5) return;
+		let i = `${e}:${t}:${r}`;
+		this.forecastRequestKey = i, this.forecastFetchedAt = r;
+		try {
+			let r = await Ie(n, e, t);
+			this.forecastRequestKey === i && (this.forecast = r);
+		} catch (e) {
+			console.warn("Weather Kiosk could not load forecast", e), this.forecastRequestKey === i && (this.forecast = []);
+		}
 	}
 	changeHistoryRange(e) {
 		!this.activeHistory || this.activeHistory.hours === e || (this.activeHistory = {
@@ -1475,18 +1827,18 @@ var Z = class extends G {
 		let e = ++this.historyRequest, { entityId: t, hours: n } = this.activeHistory;
 		this.historyLoading = !0, this.historyError = void 0;
 		try {
-			let r = await Oe(this.hass, t, n);
+			let r = await je(this.hass, t, n);
 			if (e !== this.historyRequest) return;
 			this.historyPoints = this.appendCurrentPoint(r, t);
 		} catch (t) {
 			if (e !== this.historyRequest) return;
-			console.error("Weather Kiosk could not load history", t), this.historyError = "History could not be loaded. Check that Recorder includes this entity.";
+			console.error("Weather Kiosk could not load history", t), this.historyError = this.translations.historyError;
 		} finally {
 			e === this.historyRequest && (this.historyLoading = !1);
 		}
 	}
 	appendCurrentPoint(e, t) {
-		let n = this.entity(t), r = J(n);
+		let n = this.entity(t), r = q(n);
 		if (r === void 0 || !n) return e;
 		let i = new Date(n.last_updated).getTime();
 		if (!Number.isFinite(i)) return e;
@@ -1504,14 +1856,14 @@ var Z = class extends G {
 		let i = `${e}:${r}`;
 		this.pressureRequestKey = i, this.pressureEntityId = e, this.pressureFetchedAt = r;
 		try {
-			let r = await Oe(t, e, 3);
+			let r = await je(t, e, 3);
 			if (this.pressureRequestKey !== i) return;
-			let a = J(n), o = r[0]?.value;
+			let a = q(n), o = r[0]?.value;
 			if (a === void 0 || o === void 0) {
 				this.pressureTrend = void 0;
 				return;
 			}
-			let s = a - o, c = this.config?.pressure_trend_threshold ?? Fe(n.attributes.unit_of_measurement);
+			let s = a - o, c = this.config?.pressure_trend_threshold ?? qe(n.attributes.unit_of_measurement);
 			this.pressureTrend = {
 				delta: s,
 				direction: s > c ? "rising" : s < -c ? "falling" : "steady"
@@ -1534,73 +1886,75 @@ var Z = class extends G {
 		}));
 	}
 };
-X([K({ attribute: !1 })], Z.prototype, "hass", void 0), X([q()], Z.prototype, "config", void 0), X([q()], Z.prototype, "activeHistory", void 0), X([q()], Z.prototype, "historyPoints", void 0), X([q()], Z.prototype, "historyLoading", void 0), X([q()], Z.prototype, "historyError", void 0), X([q()], Z.prototype, "pressureTrend", void 0);
-function Fe(e) {
+X([W({ attribute: !1 })], Z.prototype, "hass", void 0), X([G()], Z.prototype, "config", void 0), X([G()], Z.prototype, "activeHistory", void 0), X([G()], Z.prototype, "historyPoints", void 0), X([G()], Z.prototype, "historyLoading", void 0), X([G()], Z.prototype, "historyError", void 0), X([G()], Z.prototype, "pressureTrend", void 0), X([G()], Z.prototype, "forecast", void 0);
+function qe(e) {
 	let t = String(e ?? "").toLowerCase();
 	return t === "kpa" ? .05 : t === "inhg" ? .015 : t === "psi" ? .007 : .5;
 }
 //#endregion
 //#region src/weather-kiosk-editor.ts
-var Ie = [
-	{
-		title: "Temperatures",
-		description: "Both temperature sensors are required and shown at equal size.",
-		fields: [{
-			key: "outdoor_temperature",
-			label: "Outdoor temperature",
-			required: !0
-		}, {
-			key: "indoor_temperature",
-			label: "Indoor temperature",
-			required: !0
-		}]
-	},
-	{
-		title: "Humidity",
-		description: "Optional humidity readings shown with their matching temperature.",
-		fields: [{
-			key: "outdoor_humidity",
-			label: "Outdoor humidity"
-		}, {
-			key: "indoor_humidity",
-			label: "Indoor humidity"
-		}]
-	},
-	{
-		title: "Weather details",
-		description: "Optional pressure, rain, and wind readings.",
-		fields: [
-			{
-				key: "pressure",
-				label: "Pressure"
-			},
-			{
-				key: "rain_rate",
-				label: "Current rain rate"
-			},
-			{
-				key: "rain_24h",
-				label: "Rain over the last 24 hours"
-			},
-			{
-				key: "wind_speed",
-				label: "Wind speed"
-			},
-			{
-				key: "wind_direction",
-				label: "Wind direction"
-			}
-		]
-	}
-];
-function Le(e, t, n) {
+function Je(e) {
+	return [
+		{
+			title: e.temperatures,
+			description: e.temperaturesDescription,
+			fields: [{
+				key: "outdoor_temperature",
+				label: e.outdoorTemperature,
+				required: !0
+			}, {
+				key: "indoor_temperature",
+				label: e.indoorTemperature,
+				required: !0
+			}]
+		},
+		{
+			title: e.humidity,
+			description: e.humidityDescription,
+			fields: [{
+				key: "outdoor_humidity",
+				label: e.outdoorHumidity
+			}, {
+				key: "indoor_humidity",
+				label: e.indoorHumidity
+			}]
+		},
+		{
+			title: e.weatherDetails,
+			description: e.weatherDetailsDescription,
+			fields: [
+				{
+					key: "pressure",
+					label: e.pressure
+				},
+				{
+					key: "rain_rate",
+					label: e.currentRainRate
+				},
+				{
+					key: "rain_24h",
+					label: e.rain24h
+				},
+				{
+					key: "wind_speed",
+					label: e.windSpeed
+				},
+				{
+					key: "wind_direction",
+					label: e.windDirection
+				}
+			]
+		}
+	];
+}
+function Ye(e, t, n) {
 	let r = { ...e.entities }, i = n?.trim();
 	return i ? r[t] = i : delete r[t], {
 		...e,
 		entities: r
 	};
 }
-var Q = class extends G {
+var Q = class extends U {
 	constructor(...e) {
 		super(...e), this.handleTitleInput = (e) => {
 			if (!this.config) return;
@@ -1626,6 +1980,17 @@ var Q = class extends G {
 				n.pressure_trend_threshold = e;
 			}
 			this.emitConfig(n);
+		}, this.handleForecastEntityChanged = (e) => {
+			if (!this.config) return;
+			let t = e.detail.value?.trim(), n = { ...this.config };
+			t ? n.forecast_entity = t : delete n.forecast_entity, this.emitConfig(n);
+		}, this.handleForecastTypeChange = (e) => {
+			if (!this.config) return;
+			let t = e.currentTarget.value;
+			this.emitConfig({
+				...this.config,
+				forecast_type: t
+			});
 		};
 	}
 	static {
@@ -1718,72 +2083,105 @@ var Q = class extends G {
 		};
 	}
 	render() {
-		return this.config ? F`
+		if (!this.config) return I;
+		let e = this.translations.editor;
+		return P`
       <div class="editor">
         <section>
           <div>
-            <h3>Display</h3>
-            <p>Choose the heading and how the card responds to its available space.</p>
+            <h3>${e.display}</h3>
+            <p>${e.displayDescription}</p>
           </div>
           <div class="fields display-fields">
             <div class="field">
-              <label for="title">Title</label>
+              <label for="title">${e.title}</label>
               <input
                 id="title"
                 type="text"
                 .value=${this.config.title ?? ""}
-                placeholder="Weather"
+                placeholder=${this.translations.defaultTitle}
                 @input=${this.handleTitleInput}
               />
             </div>
             <div class="field">
-              <label for="layout">Layout</label>
+              <label for="layout">${e.layout}</label>
               <select
                 id="layout"
                 .value=${this.config.layout ?? "auto"}
                 @change=${this.handleLayoutChange}
               >
-                <option value="auto">Automatic</option>
-                <option value="landscape">Landscape</option>
-                <option value="portrait">Portrait</option>
+                <option value="auto">${e.automatic}</option>
+                <option value="landscape">${e.landscape}</option>
+                <option value="portrait">${e.portrait}</option>
               </select>
             </div>
           </div>
         </section>
 
-        ${Ie.map((e) => this.renderEntityGroup(e))}
+        ${Je(e).map((e) => this.renderEntityGroup(e))}
 
         <section>
           <div>
-            <h3>Pressure trend</h3>
-            <p>Leave blank to use the automatic threshold for the pressure unit.</p>
+            <h3>${e.forecast}</h3>
+            <p>${e.forecastDescription}</p>
+          </div>
+          <div class="fields display-fields">
+            <ha-entity-picker
+              .hass=${this.hass}
+              .value=${this.config.forecast_entity ?? ""}
+              .label=${e.forecastEntity}
+              .includeDomains=${["weather"]}
+              .allowCustomEntity=${!0}
+              @value-changed=${this.handleForecastEntityChanged}
+            ></ha-entity-picker>
+            <div class="field">
+              <label for="forecast-type">${e.forecastType}</label>
+              <select
+                id="forecast-type"
+                .value=${this.config.forecast_type ?? "hourly"}
+                @change=${this.handleForecastTypeChange}
+              >
+                <option value="hourly">${e.hourly}</option>
+                <option value="daily">${e.daily}</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div>
+            <h3>${e.pressureTrend}</h3>
+            <p>${e.pressureTrendDescription}</p>
           </div>
           <div class="field">
-            <label for="pressure-threshold">Steady threshold</label>
+            <label for="pressure-threshold">${e.steadyThreshold}</label>
             <input
               id="pressure-threshold"
               type="number"
               min="0"
               step="any"
               .value=${this.config.pressure_trend_threshold?.toString() ?? ""}
-              placeholder="Automatic"
+              placeholder=${e.automaticThreshold}
               @change=${this.handleThresholdChange}
             />
-            <span class="helper">Uses the configured pressure sensor's unit.</span>
+            <span class="helper">${e.pressureUnitHelper}</span>
           </div>
         </section>
       </div>
-    ` : L;
+    `;
+	}
+	get translations() {
+		return Y(this.hass?.locale?.language ?? this.hass?.language ?? "en");
 	}
 	renderEntityGroup(e) {
-		return F`
+		return P`
       <section>
         <div>
           <h3>${e.title}</h3>
           <p>${e.description}</p>
         </div>
         <div class="fields">
-          ${e.fields.map((e) => F`
+          ${e.fields.map((e) => P`
               <ha-entity-picker
                 .hass=${this.hass}
                 .value=${this.config?.entities[e.key] ?? ""}
@@ -1798,7 +2196,7 @@ var Q = class extends G {
     `;
 	}
 	handleEntityChanged(e, t) {
-		this.config && this.emitConfig(Le(this.config, e, t.detail.value));
+		this.config && this.emitConfig(Ye(this.config, e, t.detail.value));
 	}
 	emitConfig(e) {
 		this.config = e, this.dispatchEvent(new CustomEvent("config-changed", {
@@ -1808,14 +2206,18 @@ var Q = class extends G {
 		}));
 	}
 };
-X([K({ attribute: !1 })], Q.prototype, "hass", void 0), X([q()], Q.prototype, "config", void 0);
+X([W({ attribute: !1 })], Q.prototype, "hass", void 0), X([G()], Q.prototype, "config", void 0);
 //#endregion
 //#region src/index.ts
-var $ = "weather-kiosk-card", Re = "weather-kiosk-card-editor";
-customElements.get(Re) || customElements.define(Re, Q), customElements.get($) || customElements.define($, Z), window.customCards = window.customCards ?? [], window.customCards.some((e) => e.type === $) || window.customCards.push({
-	type: $,
-	name: "Weather Kiosk",
-	description: "A full-screen weather station card for wall-mounted displays.",
-	preview: !1
-}), console.info("%c WEATHER-KIOSK-CARD %c 0.3.0 ", "color: white; background: #1565c0; font-weight: 700;", "color: #1565c0; background: white; font-weight: 700;");
+var $ = "weather-kiosk-card", Xe = "weather-kiosk-card-editor";
+if (customElements.get(Xe) || customElements.define(Xe, Q), customElements.get($) || customElements.define($, Z), window.customCards = window.customCards ?? [], !window.customCards.some((e) => e.type === $)) {
+	let e = Y(document.documentElement.lang);
+	window.customCards.push({
+		type: $,
+		name: e.cardName,
+		description: e.cardDescription,
+		preview: !1
+	});
+}
+console.info("%c WEATHER-KIOSK-CARD %c 0.5.0 ", "color: white; background: #1565c0; font-weight: 700;", "color: #1565c0; background: white; font-weight: 700;");
 //#endregion

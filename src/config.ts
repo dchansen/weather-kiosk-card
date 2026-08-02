@@ -2,6 +2,7 @@ import type {
   LayoutMode,
   NormalizedWeatherKioskConfig,
   WeatherKioskConfig,
+  ForecastType,
 } from "./types";
 
 const REQUIRED_ENTITIES = [
@@ -15,6 +16,7 @@ const LAYOUTS: ReadonlySet<LayoutMode> = new Set([
   "landscape",
   "portrait",
 ]);
+const FORECAST_TYPES: ReadonlySet<ForecastType> = new Set(["hourly", "daily"]);
 
 export function normalizeConfig(
   value: WeatherKioskConfig,
@@ -52,10 +54,20 @@ export function normalizeConfig(
     throw new Error("pressure_trend_threshold must be a non-negative number.");
   }
 
+  if (value.forecast_entity !== undefined && !isEntityId(value.forecast_entity)) {
+    throw new Error("forecast_entity must be a valid weather entity ID.");
+  }
+
+  const forecastType = value.forecast_type ?? "hourly";
+  if (!FORECAST_TYPES.has(forecastType)) {
+    throw new Error(`Invalid forecast_type: ${String(forecastType)}`);
+  }
+
   return {
     ...value,
     type: value.type || "custom:weather-kiosk-card",
-    title: value.title?.trim() || "Weather",
+    title: value.title?.trim() || "",
+    forecast_type: forecastType,
     layout,
   };
 }

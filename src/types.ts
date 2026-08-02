@@ -21,6 +21,13 @@ export interface HomeAssistant {
 }
 
 export type LayoutMode = "auto" | "landscape" | "portrait";
+export type ForecastType = "hourly" | "daily";
+export type ForecastMetric =
+  | "temperature"
+  | "humidity"
+  | "pressure"
+  | "wind_speed"
+  | "wind_bearing";
 
 export interface WeatherKioskEntities {
   outdoor_temperature: string;
@@ -38,13 +45,31 @@ export interface WeatherKioskConfig {
   type: string;
   title?: string;
   entities: WeatherKioskEntities;
+  forecast_entity?: string;
+  forecast_type?: ForecastType;
   layout?: LayoutMode;
   pressure_trend_threshold?: number;
 }
 
 export interface NormalizedWeatherKioskConfig extends WeatherKioskConfig {
   title: string;
+  forecast_type: ForecastType;
   layout: LayoutMode;
+}
+
+export interface WeatherForecast {
+  datetime: string;
+  temperature?: number | null;
+  templow?: number | null;
+  humidity?: number | null;
+  pressure?: number | null;
+  wind_speed?: number | null;
+  wind_bearing?: number | string | null;
+}
+
+export interface WeatherForecastResponse {
+  response?: Record<string, { forecast?: WeatherForecast[] }>;
+  [entityId: string]: unknown;
 }
 
 export interface HistoryState {

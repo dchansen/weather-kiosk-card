@@ -63,6 +63,64 @@ export interface ChartModel {
   latestY: number;
 }
 
+export interface ForecastChartModel extends ChartModel {
+  forecastPoints: string;
+  nowX: number;
+}
+
+export function createForecastChartModel(
+  history: HistoryPoint[],
+  forecast: HistoryPoint[],
+  now: number,
+  hours: number,
+  width = 800,
+  height = 300,
+  padding = 18,
+): ForecastChartModel | undefined {
+  const start = now - hours * 60 * 60 * 1000;
+  const end = now + hours * 60 * 60 * 1000;
+  const past = history.filter((point) => point.timestamp >= start && point.timestamp <= now);
+  const future = forecast.filter((point) => point.timestamp >= now && point.timestamp <= end);
+  const all = [...past, ...future];
+  if (!all.length) return undefined;
+  const values = all.map((point) => point.value);
+  const rawMinimum = Math.min(...values);
+  const rawMaximum = Math.max(...values);
+  const valuePadding = Math.max((rawMaximum - rawMinimum) * 0.08, 0.1);
+  const minimum = rawMinimum - valuePadding;
+  const maximum = rawMaximum + valuePadding;
+  const innerWidth = width - padding * 2;
+  const innerHeight = height - padding * 2;
+  const coordinates = (points: HistoryPoint[]) => points.map((point) => ({
+    x: padding + ((point.timestamp - start) / (end - start)) * innerWidth,
+    y: padding + ((maximum - point.value) / (maximum - minimum)) * innerHeight,
+  }));
+  const pastCoordinates = coordinates(past);
+  const futureSource = past.length && future.length
+    ? [{ timestamp: now, value: past[past.length - 1]!.value }, ...future]
+    : future;
+  const futureCoordinates = coordinates(futureSource);
+  const line = (points: { x: number; y: number }[]) =>
+    points.map(({ x, y }) => `${x.toFixed(1)},${y.toFixed(1)}`).join(" ");
+  const historyLine = line(pastCoordinates);
+  const forecastLine = line(futureCoordinates);
+  const first = pastCoordinates[0] ?? futureCoordinates[0]!;
+  const latest = pastCoordinates[pastCoordinates.length - 1] ?? futureCoordinates[0]!;
+
+  return {
+    points: historyLine,
+    forecastPoints: forecastLine,
+    area: historyLine ? `${first.x.toFixed(1)},${height - padding} ${historyLine} ${latest.x.toFixed(1)},${height - padding}` : "",
+    minimum: rawMinimum,
+    maximum: rawMaximum,
+    start,
+    end,
+    latestX: latest.x,
+    latestY: latest.y,
+    nowX: width / 2,
+  };
+}
+
 export function createChartModel(
   source: HistoryPoint[],
   width = 800,
