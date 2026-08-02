@@ -92,6 +92,10 @@ export class WeatherKioskCard extends LitElement {
     };
   }
 
+  public static getConfigElement(): HTMLElement {
+    return document.createElement("weather-kiosk-card-editor");
+  }
+
   public connectedCallback(): void {
     super.connectedCallback();
     window.addEventListener("keydown", this.handleKeydown);

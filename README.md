@@ -3,9 +3,10 @@
 A landscape-first, responsive Home Assistant weather-station card designed to
 fill a wall-mounted tablet and remain readable from across a room.
 
-Version 0.2 renders live state, follows the active Home Assistant theme,
+Version 0.3 renders live state, follows the active Home Assistant theme,
 supports portrait displays, preserves real zero values, and opens an in-card
-history graph when any value is pressed.
+history graph when any value is pressed. It includes a graphical card editor,
+so normal setup does not require writing YAML.
 
 ## Install with HACS
 
@@ -33,6 +34,19 @@ contents so `hacs.json`, `README.md`, `src/`, and `dist/` are at repository
 root.
 
 ## Add the card to a dashboard
+
+The graphical editor is the recommended setup method:
+
+1. Edit the dashboard and select **Add card**.
+2. Search for **Weather Kiosk** and select it.
+3. Choose the indoor and outdoor temperature entities. These two are required.
+4. Add any available humidity, pressure, rain, and wind sensors.
+5. Select **Save**.
+
+The editor also provides the title, layout, and pressure-trend threshold. YAML
+mode remains available for copying configurations or advanced troubleshooting.
+
+### Manual YAML configuration
 
 After HACS installs the card, edit a dashboard, add a **Manual** card, and use:
 
@@ -105,5 +119,4 @@ full-screen kiosk presentation.
 ## Planned next slices
 
 - Forecast panel
-- Graphical card editor
 - Browser-level visual and interaction tests

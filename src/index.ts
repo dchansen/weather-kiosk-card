@@ -1,6 +1,12 @@
 import { WeatherKioskCard } from "./weather-kiosk-card";
+import { WeatherKioskCardEditor } from "./weather-kiosk-editor";
 
 const CARD_TAG = "weather-kiosk-card";
+const EDITOR_TAG = "weather-kiosk-card-editor";
+
+if (!customElements.get(EDITOR_TAG)) {
+  customElements.define(EDITOR_TAG, WeatherKioskCardEditor);
+}
 
 if (!customElements.get(CARD_TAG)) {
   customElements.define(CARD_TAG, WeatherKioskCard);
@@ -17,7 +23,7 @@ if (!window.customCards.some((card) => card.type === CARD_TAG)) {
 }
 
 console.info(
-  "%c WEATHER-KIOSK-CARD %c 0.2.0 ",
+  "%c WEATHER-KIOSK-CARD %c 0.3.0 ",
   "color: white; background: #1565c0; font-weight: 700;",
   "color: #1565c0; background: white; font-weight: 700;",
 );
