@@ -17,7 +17,7 @@ if (!window.customCards.some((card) => card.type === CARD_TAG)) {
 }
 
 console.info(
-  "%c WEATHER-KIOSK-CARD %c 0.1.0 ",
+  "%c WEATHER-KIOSK-CARD %c 0.2.0 ",
   "color: white; background: #1565c0; font-weight: 700;",
   "color: #1565c0; background: white; font-weight: 700;",
 );

@@ -44,6 +44,14 @@ export function normalizeConfig(
     throw new Error(`Invalid layout: ${String(layout)}`);
   }
 
+  if (
+    value.pressure_trend_threshold !== undefined &&
+    (!Number.isFinite(value.pressure_trend_threshold) ||
+      value.pressure_trend_threshold < 0)
+  ) {
+    throw new Error("pressure_trend_threshold must be a non-negative number.");
+  }
+
   return {
     ...value,
     type: value.type || "custom:weather-kiosk-card",

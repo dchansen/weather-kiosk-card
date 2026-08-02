@@ -38,4 +38,30 @@ describe("normalizeConfig", () => {
       }),
     ).toThrow("entities.rain_rate");
   });
+
+  it("accepts a custom non-negative pressure trend threshold", () => {
+    expect(
+      normalizeConfig({
+        type: "custom:weather-kiosk-card",
+        pressure_trend_threshold: 0.25,
+        entities: {
+          outdoor_temperature: "sensor.outdoor_temperature",
+          indoor_temperature: "sensor.indoor_temperature",
+        },
+      }).pressure_trend_threshold,
+    ).toBe(0.25);
+  });
+
+  it("rejects a negative pressure trend threshold", () => {
+    expect(() =>
+      normalizeConfig({
+        type: "custom:weather-kiosk-card",
+        pressure_trend_threshold: -1,
+        entities: {
+          outdoor_temperature: "sensor.outdoor_temperature",
+          indoor_temperature: "sensor.indoor_temperature",
+        },
+      }),
+    ).toThrow("pressure_trend_threshold");
+  });
 });

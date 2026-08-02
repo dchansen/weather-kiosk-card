@@ -17,6 +17,7 @@ export interface HomeAssistant {
   locale?: {
     language?: string;
   };
+  callWS<T>(message: Record<string, unknown>): Promise<T>;
 }
 
 export type LayoutMode = "auto" | "landscape" | "portrait";
@@ -38,11 +39,29 @@ export interface WeatherKioskConfig {
   title?: string;
   entities: WeatherKioskEntities;
   layout?: LayoutMode;
+  pressure_trend_threshold?: number;
 }
 
 export interface NormalizedWeatherKioskConfig extends WeatherKioskConfig {
   title: string;
   layout: LayoutMode;
+}
+
+export interface HistoryState {
+  /** Compact state value returned by Home Assistant's history websocket API. */
+  s: string;
+  /** Last changed, as Unix seconds. May be omitted when equal to last updated. */
+  lc?: number;
+  /** Last updated, as Unix seconds. */
+  lu: number;
+  a?: Record<string, unknown>;
+}
+
+export type HistoryResponse = Record<string, HistoryState[]>;
+
+export interface HistoryPoint {
+  timestamp: number;
+  value: number;
 }
 
 declare global {

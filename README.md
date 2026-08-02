@@ -3,9 +3,9 @@
 A landscape-first, responsive Home Assistant weather-station card designed to
 fill a wall-mounted tablet and remain readable from across a room.
 
-This is a clean v0.1 foundation. It renders live state, follows the active Home
-Assistant theme, supports portrait displays, preserves real zero values, and
-opens Home Assistant's entity details when a value is pressed.
+Version 0.2 renders live state, follows the active Home Assistant theme,
+supports portrait displays, preserves real zero values, and opens an in-card
+history graph when any value is pressed.
 
 ## Install with HACS
 
@@ -72,6 +72,22 @@ IDs are configurable; the card does not depend on a particular integration.
 `layout` accepts `auto`, `landscape`, or `portrait`. In `auto`, CSS orientation
 and available width determine the layout.
 
+Every configured value is independently tappable. The history overlay reads
+the entity from Home Assistant Recorder and supports 6-hour, 24-hour, and
+7-day ranges. Its **Entity details** button still opens Home Assistant's native
+more-info dialog.
+
+Pressure trend is calculated automatically by comparing the current pressure
+with the oldest recorded value from the last three hours. The default steady
+threshold is selected from the pressure unit. It can be overridden at card
+level when needed:
+
+```yaml
+pressure_trend_threshold: 0.5
+```
+
+The threshold uses the same unit as the configured pressure entity.
+
 ## Development
 
 ```bash
@@ -88,9 +104,6 @@ full-screen kiosk presentation.
 
 ## Planned next slices
 
-- Pressure trend and richer wind/rain presentation
 - Forecast panel
-- In-card history graphs with selectable time ranges
 - Graphical card editor
 - Browser-level visual and interaction tests
-- Release/HACS automation
