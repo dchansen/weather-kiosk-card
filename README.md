@@ -7,6 +7,47 @@ This is a clean v0.1 foundation. It renders live state, follows the active Home
 Assistant theme, supports portrait displays, preserves real zero values, and
 opens Home Assistant's entity details when a value is pressed.
 
+## Install with HACS
+
+The GitHub repository must be named `weather-kiosk-card`. The compiled file
+`dist/weather-kiosk-card.js` is intentionally committed because HACS installs
+that browser bundle; it does not build the TypeScript source.
+
+1. In HACS, open **Dashboard**.
+2. Open the three-dot menu and choose **Custom repositories**.
+3. Enter the GitHub repository URL, select **Dashboard**, and add it.
+4. Find **Weather Kiosk Card** in HACS and choose **Download**.
+5. Refresh the browser. If the card is still not listed in the card picker,
+   clear the frontend cache or reload Home Assistant.
+
+If HACS reports an invalid structure, verify on GitHub—not only locally—that
+the default branch contains both:
+
+```text
+hacs.json
+dist/weather-kiosk-card.js
+```
+
+Do not upload the project ZIP as a single file in the repository. Extract its
+contents so `hacs.json`, `README.md`, `src/`, and `dist/` are at repository
+root.
+
+## Add the card to a dashboard
+
+After HACS installs the card, edit a dashboard, add a **Manual** card, and use:
+
+```yaml
+type: custom:weather-kiosk-card
+title: Weather at home
+layout: auto
+entities:
+  outdoor_temperature: sensor.ecowitt_outdoor_temperature
+  indoor_temperature: sensor.airthings_indoor_temperature
+```
+
+Replace those two example entity IDs with your own. They are required; the
+remaining sensors below are optional.
+
 ## Configuration
 
 ```yaml
@@ -40,9 +81,10 @@ npm test
 npm run build
 ```
 
-Copy `dist/weather-kiosk-card.js` to Home Assistant's `config/www` directory,
-then add `/local/weather-kiosk-card.js` as a JavaScript module dashboard
-resource. Use a panel view for the intended full-screen kiosk presentation.
+For a manual installation, copy `dist/weather-kiosk-card.js` to Home
+Assistant's `config/www` directory, then add `/local/weather-kiosk-card.js` as
+a JavaScript module dashboard resource. Use a panel view for the intended
+full-screen kiosk presentation.
 
 ## Planned next slices
 
